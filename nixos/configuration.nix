@@ -33,20 +33,21 @@
       #   });
       # })
     ];
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-    };
+    config.allowUnfree = true;
   };
 
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
   nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
 
-  # This will additionally add your inputs to the system's legacy channels
-  # Making legacy nix commands consistent as well, awesome!
-  nix.nixPath = ["/etc/nix/path"];
+  nix = {
+    # This will additionally add your inputs to the system's legacy channels
+    # Making legacy nix commands consistent as well, awesome!
+    nixPath = ["/etc/nix/path"];
+    # Nix binary cache URLs
+    substituters = [ "https://cache.nixos.org/" "https://hyprland.cachix.org/" ];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
   environment.etc =
     lib.mapAttrs'
     (name: value: {
@@ -57,46 +58,106 @@
 
   nix.settings = {
     # Enable flakes and new 'nix' command
-    experimental-features = "nix-command flakes";
+    experimental-features = ["nix-command" "flakes"];
     # Deduplicate and optimize nix store
     auto-optimise-store = true;
   };
 
-  # FIXME: Add the rest of your current configuration
+  networking.hostName = "niflheim";
+  nerworking.networkmanager.enable = true;
 
-  # TODO: Set your hostname
-  networking.hostName = "your-hostname";
-
-  # TODO: This is just an example, be sure to use whatever bootloader you prefer
-  boot.loader.systemd-boot.enable = true;
-
-  # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
-  users.users = {
-    # FIXME: Replace with your username
-    your-username = {
-      # TODO: You can set an initial password for your user.
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "correcthorsebatterystaple";
-      isNormalUser = true;
-      openssh.authorizedKeys.keys = [
-        # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
-      ];
-      # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = ["wheel"];
+  time.timeZone = "America/Sao_Paulo";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = { 
+      LC_ADDRESS = "pt_BR.UTF-8";
+      LC_IDENTIFICATION = "pt_BR.UTF-8";
+      LC_MEASUREMENT = "pt_BR.UTF-8";
+      LC_MONETARY = "pt_BR.UTF-8";
+      LC_NAME = "pt_BR.UTF-8";
+      LC_NUMERIC = "pt_BR.UTF-8";
+      LC_PAPER = "pt_BR.UTF-8";
+      LC_TELEPHONE = "pt_BR.UTF-8";
+      LC_TIME = "pt_BR.UTF-8";
     };
   };
 
-  # This setups a SSH server. Very important if you're setting up a headless system.
-  # Feel free to remove if you don't need it.
-  services.openssh = {
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  programs.fish.enable = true;
+  programs.ssh.startAgent = true;
+
+  users.users = {
+    bunny = {
+      initialPassword = "strongandcomplicatedpassword";
+      isNormalUser = true;
+      description = "BunnY";
+      shell = pkgs.fish;
+      openssh.authorizedKeys.keys = [];
+      extraGroups = [ "networkmanager" "wheel" "docker" "disk"];
+      packages = with pkgs; [
+        discord
+        firefox
+        neofetch
+        cava
+        vscodium
+        alacritty
+        tmux
+        xfce.thunar
+        rofi-wayland
+        starship
+        pamixer
+        pavucontrol
+        dbeaver
+        insomnia
+        mangohud
+        tuxguitar
+        mpvpaper
+        bottom
+      ];
+    };
+  };
+
+  hardware.bluetooth = {
     enable = true;
+    powerOnBoot = true;
+  };
+
+  fonts.fonts = with pkgs; [
+    (nerdfonts.override { fonts = [ "JetBrainsMono" "DroidSansMono" ];})
+    jetbrains-mono
+    noto-fonts-emoji
+  ];
+
+  services.openssh = {
+    enable = false;
     settings = {
       # Forbid root login through SSH.
       PermitRootLogin = "no";
       # Use keys only. Remove if you want to SSH using password (not recommended)
       PasswordAuthentication = false;
     };
+  };
+   
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+
+  # RTKIT pipewire related.
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = false;
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
