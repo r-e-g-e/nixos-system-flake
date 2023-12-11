@@ -27,7 +27,10 @@
     nixosConfigurations = {
       niflheim = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        modules = [./nixos/configuration.nix];
+        modules = [
+          ./nixos/configuration.nix
+          ./home-manager/packages/greetd.nix
+        ];
       };
     };
   };

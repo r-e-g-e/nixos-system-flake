@@ -17,6 +17,6 @@
   };
 
   environment.etc."greetd/environments".text = ''
-    Hyprland
+    hyprland
   '';
 }

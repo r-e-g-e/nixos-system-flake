@@ -14,7 +14,8 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    ./packages/greetd.nix
+    # ./packages/greetd.nix
+    ./packages/hyprland.nix
   ];
 
   nixpkgs = {
@@ -43,11 +44,15 @@
   home = {
     username = "bunny";
     homeDirectory = "/home/bunny";
+    packages = with pkgs; [
+      steam
+      discord
+    ];
   };
 
 
   # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
+  programs.neovim.enable = true;
   # home.packages = with pkgs; [ steam ];
 
   # Enable home-manager and git
