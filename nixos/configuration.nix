@@ -44,9 +44,11 @@
     # This will additionally add your inputs to the system's legacy channels
     # Making legacy nix commands consistent as well, awesome!
     nixPath = ["/etc/nix/path"];
-    # Nix binary cache URLs
-    substituters = [ "https://cache.nixos.org/" "https://hyprland.cachix.org/" ];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    settings = {
+      # Nix binary cache URLs
+      substituters = [ "https://cache.nixos.org/" "https://hyprland.cachix.org/" ];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    };
   };
   environment.etc =
     lib.mapAttrs'
@@ -64,7 +66,7 @@
   };
 
   networking.hostName = "niflheim";
-  nerworking.networkmanager.enable = true;
+  networking.networkmanager.enable = true;
 
   time.timeZone = "America/Sao_Paulo";
   i18n = {
