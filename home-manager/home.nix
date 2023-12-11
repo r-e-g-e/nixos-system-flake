@@ -14,6 +14,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
+    ./packages/greetd.nix
   ];
 
   nixpkgs = {
@@ -29,6 +30,7 @@
       #   });
       # })
     ];
+
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages
@@ -38,11 +40,11 @@
     };
   };
 
-  # TODO: Set your username
   home = {
-    username = "your-username";
-    homeDirectory = "/home/your-username";
+    username = "bunny";
+    homeDirectory = "/home/bunny";
   };
+
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;

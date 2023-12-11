@@ -2,6 +2,7 @@
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
+  outputs,
   lib,
   config,
   pkgs,
@@ -18,7 +19,15 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.home-manager
   ];
+
+  home-manager = {
+    extraSpecialArgs = { inherit inputs outputs; };
+    users = {
+      bunny = import ../home-manager/home.nix;
+    };
+  };
 
   nixpkgs = {
     # You can add overlays here
@@ -88,6 +97,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  };
   programs.fish.enable = true;
   programs.ssh.startAgent = true;
 
@@ -99,26 +113,7 @@
       shell = pkgs.fish;
       openssh.authorizedKeys.keys = [];
       extraGroups = [ "networkmanager" "wheel" "docker" "disk"];
-      packages = with pkgs; [
-        discord
-        firefox
-        neofetch
-        cava
-        vscodium
-        alacritty
-        tmux
-        xfce.thunar
-        rofi-wayland
-        starship
-        pamixer
-        pavucontrol
-        dbeaver
-        insomnia
-        mangohud
-        tuxguitar
-        mpvpaper
-        bottom
-      ];
+      packages = [ inputs.home-manager.packages.${pkgs.system}.default ];
     };
   };
 
@@ -142,6 +137,27 @@
       PasswordAuthentication = false;
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    # discord
+    # firefox
+    # neofetch
+    # cava
+    # vscodium
+    # alacritty
+    # tmux
+    # xfce.thunar
+    # rofi-wayland
+    # starship
+    # pamixer
+    # pavucontrol
+    # dbeaver
+    # insomnia
+    # mangohud
+    # tuxguitar
+    # mpvpaper
+    bottom
+  ];
    
   xdg.portal = {
     enable = true;
@@ -157,9 +173,17 @@
     pulse.enable = true;
   };
 
-  virtualisation.docker = {
-    enable = true;
-    enableOnBoot = false;
+  virtualisation = {
+    # following configuration is added only when building VM with build-vm
+    vmVariant.virtualisation = {
+      memorySize = 2048;
+      cores = 4;
+    };
+
+    docker = {
+      enable = true;
+      enableOnBoot = false;
+    };
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
