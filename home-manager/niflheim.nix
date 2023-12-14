@@ -14,7 +14,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     ./packages/hyprland.nix
-    ./packages/dunst.nix 
+    # ./packages/dunst.nix 
   ];
 
   nixpkgs = {
@@ -48,7 +48,6 @@
       discord
     ];
   };
-
 
   # Add stuff for your user as you see fit:
   programs.neovim.enable = true;
