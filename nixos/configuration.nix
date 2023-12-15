@@ -23,17 +23,9 @@
   ];
 
   home-manager = {
+    extraSpecialArgs = { inherit inputs outputs; };
     users = {
-      bunny = {
-        import
-      };
-    };
-
-    wayland.windowManager.hyprland = {
-      enable = true;
-      # systemd.enable = true;
-      # xwayland.enable = true;
-      # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      bunny = import ../home-manager/niflheim.nix;
     };
   };
 
