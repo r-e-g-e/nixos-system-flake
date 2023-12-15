@@ -15,7 +15,9 @@
     # inputs.nix-colors.homeManagerModule
 
     # You can also split up your configuration and import pieces of it here:
-    ./packages
+    ./packages/hyprland.nix
+    # ./packages/dunst.nix
+    ./packages/vscodium.nix
   ];
 
   nixpkgs = {

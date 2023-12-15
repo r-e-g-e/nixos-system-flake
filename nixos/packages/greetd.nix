@@ -18,6 +18,6 @@
 
   environment.etc."greetd/environments".text = ''
     hyprland
-    KDE
+    kde-wayland
   '';
 }
