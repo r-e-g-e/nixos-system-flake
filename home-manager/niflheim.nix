@@ -2,6 +2,7 @@
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   inputs,
+  outputs,
   lib,
   config,
   pkgs,
@@ -14,9 +15,7 @@
     # inputs.nix-colors.homeManagerModule
 
     # You can also split up your configuration and import pieces of it here:
-    ./packages/hyprland.nix
-    # ./packages/dunst.nix 
-    # ./packages/greetd.nix 
+    ./packages
   ];
 
   nixpkgs = {

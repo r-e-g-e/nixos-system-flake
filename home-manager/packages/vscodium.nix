@@ -12,12 +12,11 @@
   ];
   userSettings = {
     "telemetry" = {
-      "telemetryLevel" = "off",
+      "telemetryLevel" = "off";
       "enableCrashReporter" = false;
       "enableTelemetry" = false;
     };
-    "editor" = {
-      "fontFamily" = "'victor mono', 'victor-mono', 'monospace', monospace";
+    "editor" = { "fontFamily" = "'victor mono', 'victor-mono', 'monospace', monospace";
       "fontLigatures" = true;
     };
   };

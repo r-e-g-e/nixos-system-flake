@@ -20,6 +20,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
+    ./packages/greetd.nix
   ];
 
   home-manager = {
@@ -97,6 +98,19 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.displayManager.defaultSession = "plasmawayland";
+  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+    elisa
+    gwenview
+    okular
+    oxygen
+    khelpcenter
+    konsole
+    plasma-browser-integration
+    print-manager
+  ];
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -107,7 +121,7 @@
 
   users.users = {
     bunny = {
-      initialPassword = "strongandcomplicatedpassword";
+      initialPassword = "password";
       isNormalUser = true;
       description = "BunnY";
       shell = pkgs.fish;
@@ -141,24 +155,10 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # discord
-    # firefox
-    # neofetch
-    # cava
-    # vscodium
-    # alacritty
-    # tmux
-    # xfce.thunar
-    # rofi-wayland
-    # starship
-    # pamixer
-    # pavucontrol
-    # dbeaver
-    # insomnia
-    # mangohud
-    # tuxguitar
-    # mpvpaper
-    bottom
+    neovim
+    git
+    htop
+    any-nix-shell
   ];
    
   xdg.portal = {
