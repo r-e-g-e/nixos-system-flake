@@ -58,22 +58,26 @@
       # Nix binary cache URLs
       substituters = [ "https://cache.nixos.org/" "https://hyprland.cachix.org/" ];
       trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+      # Enable flakes and new 'nix' command
+      experimental-features = ["nix-command" "flakes"];
+      # Deduplicate and optimize nix store
+      auto-optimise-store = true;
+    };
+
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
     };
   };
-  environment.etc =
-    lib.mapAttrs'
-    (name: value: {
-      name = "nix/path/${name}";
-      value.source = value.flake;
-    })
-    config.nix.registry;
 
-  nix.settings = {
-    # Enable flakes and new 'nix' command
-    experimental-features = ["nix-command" "flakes"];
-    # Deduplicate and optimize nix store
-    auto-optimise-store = true;
-  };
+  # environment.etc =
+  #   lib.mapAttrs'
+  #   (name: value: {
+  #     name = "nix/path/${name}";
+  #     value.source = value.flake;
+  #   })
+  #   config.nix.registry;
 
   networking.hostName = "niflheim";
   networking.networkmanager.enable = true;
@@ -98,6 +102,23 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session.command = ''
+        ${pkgs.greetd.tuigreet}/bin/tuigreet \
+        --time \
+        --asterisks \
+        --user-menu \
+        --cmd startplasma-wayland
+      '';
+    };
+  };
+
+  environment.etc."greetd/environments".text = ''
+    hyprland
+  '';    
+
   services.xserver.desktopManager.plasma5.enable = true;
   services.xserver.displayManager.defaultSession = "plasmawayland";
   environment.plasma5.excludePackages = with pkgs.libsForQt5; [
@@ -111,11 +132,12 @@
     print-manager
   ];
 
-  # programs.hyprland = {
-  #   enable = true;
-  #   xwayland.enable = true;
-  #   package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  # };
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  };
+
   programs.fish.enable = true;
   programs.ssh.startAgent = true;
 
@@ -185,6 +207,11 @@
       enable = true;
       enableOnBoot = false;
     };
+  };
+
+  system.autoUpgrade = {
+    enable = true;
+    channel = "https://nixos.org/channels/nixos-23.05";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

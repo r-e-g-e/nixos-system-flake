@@ -20,7 +20,7 @@
       niflheim = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./niflheim/configuration.nix
+          ./nixos/configuration.nix
         ];
       };
     };
