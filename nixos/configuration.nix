@@ -177,6 +177,7 @@
 
   environment.systemPackages = with pkgs; [
     neovim
+    neofetch
     git
     htop
     any-nix-shell
