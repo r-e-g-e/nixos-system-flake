@@ -58,7 +58,7 @@ in  {
       ".config/gtk-2.0/config.ini".text = gtkConfig;
       ".config/gtk-3.0/config.ini".text = gtkConfig;
       ".config/gtk-4.0/config.ini".text = gtkConfig;
-      ".config/dunst/dunstrc" = ''
+      ".config/dunst/dunstrc".text = ''
       [global]
           font = JetbrainsMono NF 11
           word_wrap = yes
@@ -85,8 +85,6 @@ in  {
           icon_corner_radius = 5
           text_icon_padding = 10
 
-          dmenu = /usr/bin/rofi -p dunst:
-          browser = /usr/bin/firefox --new-tab
 
           mouse_left_click = do_action
           mouse_middle_click = close_all
@@ -106,11 +104,10 @@ in  {
           background = "#!!{primary}88"
           foreground = "#!!text"
           frame_color = "#!!accent"
-            '';
+      '';
     };
   };
 
-    wayland.windowManager.hyprland.enable = true;
   services.dunst.enable = true;
   programs.vscode = {
     enable = true;
@@ -128,8 +125,22 @@ in  {
       "telemetry.telemetryLevel" = "off";
       "telemetry.enableCrashReporter" = false;
       "telemetry.enableTelemetry" = false;
+
       "editor.fontFamily" = "'victor mono', 'victor-mono', 'monospace', monospace";
       "editor.fontLigatures" = true;
+      "editor.fontWeight" = "bold";
+      "editor.lineNumbers" = "relative";
+      "editor.minimap.enabled" = false;
+      "editor.renderLineHighlight" = "all";
+      "editor.semanticHighlighting.enabled" = true;
+
+      "[typescript].editor.defaultFormatter" = "esbenp.prettier-vscode";
+      "typescript.preferences.importModuleSpecifier" = "relative";
+      "javascript.preferences.importModuleSpecifier" = "relative";
+      "workbench.iconTheme" = "material-icon-theme";
+      "workbench.startupEditor" = "none";
+      "explorer.compactFolders" = false;
+      "breadcrumbs.enabled" = false;
     };
     extensions = with pkgs.vscode-extensions; [
       vscodevim.vim
@@ -152,5 +163,5 @@ in  {
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
 }
