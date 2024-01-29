@@ -158,7 +158,7 @@
   };
 
   fonts.fontDir.enable = true;
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" "DroidSansMono" ];})
     jetbrains-mono
     noto-fonts-emoji
@@ -212,7 +212,7 @@
 
   system.autoUpgrade = {
     enable = true;
-    channel = "https://nixos.org/channels/nixos-23.05";
+    channel = "https://nixos.org/channels/nixos-23.11";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
