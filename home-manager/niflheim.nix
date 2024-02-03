@@ -115,11 +115,67 @@ in  {
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = true;
     keybindings = [
-      # {
-      #   key = "";
-      #   command = "";
-      #   when = "";
-      # }
+      {
+        key = "ctrl+'";
+        command = "workbench.action.terminal.toggleTerminal";
+        when = "terminal.active";
+      }
+      {
+        key = "ctrl+`";
+        command = "-workbench.action.terminal.toggleTerminal";
+        when = "terminal.active";
+      }
+      {
+        key = "ctrl+h";
+        command = "workbench.action.previousEditor";
+      }
+      {
+        key = "ctrl+pageup";
+        command = "-workbench.action.previousEditor";
+      }
+      {
+        key = "ctrl+l";
+        command = "workbench.action.nextEditor";
+      }
+      {
+        key = "ctrl+pagedown";
+        command = "-workbench.action.nextEditor";
+      }
+      {
+        key = "shift+alt+/";
+        command = "editor.action.commentLine";
+        when = "editorTextFocus && !editorReadonly";
+      }
+      {
+        key = "ctrl+/";
+        command = "-editor.action.commentLine";
+        when = "editorTextFocus && !editorReadonly";
+      }
+      {
+        key = "shift+alt+a";
+        command = "editor.action.blockComment";
+        when = "editorTextFocus && !editorReadonly";
+      }
+      {
+        key = "ctrl+shift+a";
+        command = "-editor.action.blockComment";
+        when = "editorTextFocus && !editorReadonly";
+      }
+      {
+        key = "ctrl+p";
+        command = "-extension.vim_ctrl+p";
+        when = "editorTextFocus && vim.active && vim.use<C-p> && !inDebugRepl || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'SearchInProgressMode'";
+      }
+      {
+        key = "ctrl+shift+;";
+        command = "editor.action.revealDefinition";
+        when = "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor";
+      }
+      {
+        key = "f12";
+        command = "-editor.action.revealDefinition";
+        when = "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor";
+      }
     ];
     userSettings = {
       "telemetry.telemetryLevel" = "off";
@@ -153,11 +209,19 @@ in  {
     ];
   };
 
+  programs.firefox.enable = true;
   programs.alacritty.enable = true;
   programs.neovim.enable = true;
-  programs.firefox.enable = true;
   programs.home-manager.enable = true;
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "Rodrigo Tavares";
+    userEmail = "rodrigo.tavares.lima@hotmail.com";
+  };
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

@@ -71,13 +71,13 @@
     };
   };
 
-  # environment.etc =
-  #   lib.mapAttrs'
-  #   (name: value: {
-  #     name = "nix/path/${name}";
-  #     value.source = value.flake;
-  #   })
-  #   config.nix.registry;
+  environment.etc =
+    lib.mapAttrs'
+    (name: value: {
+      name = "nix/path/${name}";
+      value.source = value.flake;
+    })
+    config.nix.registry;
 
   networking.hostName = "niflheim";
   networking.networkmanager.enable = true;
@@ -115,9 +115,9 @@
     };
   };
 
-  environment.etc."greetd/environments".text = ''
-    hyprland
-  '';    
+  # environment.etc."greetd/environments".text = ''
+  #   hyprland
+  # '';    
 
   services.xserver.desktopManager.plasma5.enable = true;
   services.xserver.displayManager.defaultSession = "plasmawayland";
@@ -176,6 +176,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    mdadm
     neovim
     neofetch
     git

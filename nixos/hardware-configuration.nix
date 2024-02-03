@@ -24,6 +24,16 @@
       fsType = "vfat";
     };
 
+  fileSystems."/media/chungus" =
+    { device = "/dev/md127";
+      fsType = "ext4";
+    };
+
+  fileSystems."/media/omnichungus" =
+    { device = "/dev/disk/by-uuid/888d691c-c896-4298-a3d9-4d676b1b1479";
+      fsType = "ext4";
+    };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -36,4 +46,5 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  boot.swraid.enable = true;
 }
