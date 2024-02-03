@@ -57,6 +57,7 @@ in  {
       ".config/gtk-2.0/config.ini".text = gtkConfig;
       ".config/gtk-3.0/config.ini".text = gtkConfig;
       ".config/gtk-4.0/config.ini".text = gtkConfig;
+      ".config/hypr/hyprland.conf".source = "./configs/hyprland.conf";
       # ".config/dunst/dunstrc".text = ''
       # [global]
       #     font = JetbrainsMono NF 11
@@ -206,6 +207,13 @@ in  {
       waderyan.gitblame
       editorconfig.editorconfig
     ];
+  };
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+    enableNvidiaPatches = false;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
 
   programs.firefox.enable = true;

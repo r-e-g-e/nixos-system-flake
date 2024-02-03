@@ -132,11 +132,11 @@
     print-manager
   ];
 
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  };
+  # programs.hyprland = {
+  #   enable = true;
+  #   xwayland.enable = true;
+  #   package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  # };
 
   programs.fish.enable = true;
   programs.ssh.startAgent = true;
