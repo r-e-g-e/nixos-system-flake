@@ -50,7 +50,6 @@ in  {
     username = "bunny";
     homeDirectory = "/home/bunny";
     packages = with pkgs; [
-      steam
       discord
     ];
     file = {
