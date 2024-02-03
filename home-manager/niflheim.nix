@@ -16,11 +16,8 @@ in  {
   # You can import other home-manager modules here
 
   imports = [
-    # If you want to use home-manager modules from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModule
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./packages/dunst.nix
+    ./configs/hyprland.nix
+    ./configs/vscodium.nix
   ];
 
   nixpkgs = {
@@ -54,7 +51,6 @@ in  {
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;
-      "~/.config/hypr/hyprland.conf".source = ./configs/hyprland.conf;
       "~/.config/gtk-2.0/config.ini".text = gtkConfig;
       "~/.config/gtk-3.0/config.ini".text = gtkConfig;
       "~/.config/gtk-4.0/config.ini".text = gtkConfig;
@@ -65,113 +61,15 @@ in  {
     enable = true;
     configFile = ./configs/dunstrc;
   };
-  programs.vscode = {
+  programs.waybar = {
     enable = true;
-    package = pkgs.vscodium-fhs;
-    enableUpdateCheck = false;
-    enableExtensionUpdateCheck = true;
-    keybindings = [
-      {
-        key = "ctrl+'";
-        command = "workbench.action.terminal.toggleTerminal";
-        when = "terminal.active";
-      }
-      {
-        key = "ctrl+`";
-        command = "-workbench.action.terminal.toggleTerminal";
-        when = "terminal.active";
-      }
-      {
-        key = "ctrl+h";
-        command = "workbench.action.previousEditor";
-      }
-      {
-        key = "ctrl+pageup";
-        command = "-workbench.action.previousEditor";
-      }
-      {
-        key = "ctrl+l";
-        command = "workbench.action.nextEditor";
-      }
-      {
-        key = "ctrl+pagedown";
-        command = "-workbench.action.nextEditor";
-      }
-      {
-        key = "shift+alt+/";
-        command = "editor.action.commentLine";
-        when = "editorTextFocus && !editorReadonly";
-      }
-      {
-        key = "ctrl+/";
-        command = "-editor.action.commentLine";
-        when = "editorTextFocus && !editorReadonly";
-      }
-      {
-        key = "shift+alt+a";
-        command = "editor.action.blockComment";
-        when = "editorTextFocus && !editorReadonly";
-      }
-      {
-        key = "ctrl+shift+a";
-        command = "-editor.action.blockComment";
-        when = "editorTextFocus && !editorReadonly";
-      }
-      {
-        key = "ctrl+p";
-        command = "-extension.vim_ctrl+p";
-        when = "editorTextFocus && vim.active && vim.use<C-p> && !inDebugRepl || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'SearchInProgressMode'";
-      }
-      {
-        key = "ctrl+shift+;";
-        command = "editor.action.revealDefinition";
-        when = "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor";
-      }
-      {
-        key = "f12";
-        command = "-editor.action.revealDefinition";
-        when = "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor";
-      }
-    ];
-    userSettings = {
-      "telemetry.telemetryLevel" = "off";
-      "telemetry.enableCrashReporter" = false;
-      "telemetry.enableTelemetry" = false;
-
-      "editor.fontFamily" = "'victor mono', 'victor-mono', 'monospace', monospace";
-      "editor.fontLigatures" = true;
-      "editor.fontWeight" = "bold";
-      "editor.lineNumbers" = "relative";
-      "editor.minimap.enabled" = false;
-      "editor.renderLineHighlight" = "all";
-      "editor.semanticHighlighting.enabled" = true;
-
-      "[typescript].editor.defaultFormatter" = "esbenp.prettier-vscode";
-      "typescript.preferences.importModuleSpecifier" = "relative";
-      "javascript.preferences.importModuleSpecifier" = "relative";
-      "workbench.iconTheme" = "material-icon-theme";
-      "workbench.startupEditor" = "none";
-      "explorer.compactFolders" = false;
-      "breadcrumbs.enabled" = false;
-    };
-    extensions = with pkgs.vscode-extensions; [
-      vscodevim.vim
-      esbenp.prettier-vscode
-      rust-lang.rust-analyzer
-      pkief.material-icon-theme
-      donjayamanne.githistory
-      waderyan.gitblame
-      editorconfig.editorconfig
-    ];
+    systemd.enable = true;
+    systemd.target = "hyprland-session.target";
   };
-
-  wayland.windowManager.hyprland = {
+  programs.rofi = {
     enable = true;
-    xwayland.enable = true;
-    enableNvidiaPatches = false;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    package = pkgs.rofi-wayland;
   };
-
   programs.firefox.enable = true;
   programs.alacritty.enable = true;
   programs.neovim.enable = true;

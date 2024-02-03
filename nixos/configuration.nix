@@ -110,6 +110,14 @@
         --time \
         --asterisks \
         --user-menu \
+        --cmd Hyprland
+      '';
+
+      kde_session.command = ''
+        ${pkgs.greetd.tuigreet}/bin/tuigreet \
+        --time \
+        --asterisks \
+        --user-menu \
         --cmd startplasma-wayland
       '';
     };
@@ -192,6 +200,7 @@
 
   # RTKIT pipewire related.
   security.rtkit.enable = true;
+  security.polkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
