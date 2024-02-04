@@ -21,8 +21,8 @@
         layout = "dwindle";
       };
       misc = {
-        disable_hyprland_logo = true;
-        disable_splash_rendering = true;
+        disable_hyprland_logo = false;
+        disable_splash_rendering = false;
         mouse_move_enables_dpms = true;
         enable_swallow = true;
         swallow_regex = "^(wezterm)$";

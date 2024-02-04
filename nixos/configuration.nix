@@ -102,6 +102,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  services.flatpak.enable = true;
   services.greetd = {
     enable = true;
     settings = {
@@ -139,12 +140,6 @@
     plasma-browser-integration
     print-manager
   ];
-
-  # programs.hyprland = {
-  #   enable = true;
-  #   xwayland.enable = true;
-  #   package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  # };
 
   programs.fish.enable = true;
   programs.ssh.startAgent = true;

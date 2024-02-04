@@ -18,6 +18,7 @@ in  {
   imports = [
     ./configs/hyprland.nix
     ./configs/vscodium.nix
+    ./configs/waybar.nix
   ];
 
   nixpkgs = {
@@ -61,15 +62,7 @@ in  {
     enable = true;
     configFile = ./configs/dunstrc;
   };
-  programs.waybar = {
-    enable = true;
-    systemd.enable = true;
-    systemd.target = "hyprland-session.target";
-  };
-  programs.rofi = {
-    enable = true;
-    package = pkgs.rofi-wayland;
-  };
+
   programs.firefox.enable = true;
   programs.alacritty.enable = true;
   programs.neovim.enable = true;
@@ -82,6 +75,16 @@ in  {
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
+  };
+  programs.rofi = {
+    enable = true;
+    package = pkgs.rofi-wayland;
+  };
+  programs.fish = {
+    enable = true;
+    shellAliases = {
+      ".." = "cd ..";
+    };
   };
 
   # Nicely reload system units when changing configs
