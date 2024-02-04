@@ -102,6 +102,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+
+
   services.flatpak.enable = true;
   services.greetd = {
     enable = true;
@@ -186,6 +188,12 @@
     git
     htop
     any-nix-shell
+    libvirt
+    virt-manager
+    spice
+    spice-gtk
+    spice-protocol
+    gnome.adwaita-icon-theme
   ];
    
   xdg.portal = {
@@ -208,6 +216,15 @@
     vmVariant.virtualisation = {
       memorySize = 2048;
       cores = 4;
+    };
+
+    libvirtd = {
+      enable = true;
+      qemu = {
+        swtpm.enable = true;
+        ovmf.enable = true;
+        ovmf.packages = with pkgs; [ OVMFFull.fd ];
+      };
     };
 
     docker = {

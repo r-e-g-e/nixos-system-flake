@@ -49,6 +49,7 @@ in  {
     homeDirectory = "/home/bunny";
     packages = with pkgs; [
       discord
+      docker-compose
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;
@@ -67,6 +68,10 @@ in  {
   programs.alacritty.enable = true;
   programs.neovim.enable = true;
   programs.home-manager.enable = true;
+  programs.bat = {
+    enable = true;
+    config = {};
+  };
   programs.git = {
     enable = true;
     userName = "Rodrigo Tavares";
