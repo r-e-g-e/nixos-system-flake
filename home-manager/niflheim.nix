@@ -50,6 +50,7 @@ in  {
     packages = with pkgs; [
       discord
       docker-compose
+      any-nix-shell
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;
@@ -63,6 +64,8 @@ in  {
     enable = true;
     configFile = ./configs/dunstrc;
   };
+
+  services.blueman-applet.enable = true;
 
   programs.firefox.enable = true;
   programs.alacritty.enable = true;
@@ -90,6 +93,10 @@ in  {
     shellAliases = {
       ".." = "cd ..";
     };
+    interactiveShellInit = ''
+      set fish_greeting
+      any-nix-shell fish --info-right | source
+    '';
   };
 
   # Nicely reload system units when changing configs

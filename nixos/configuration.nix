@@ -102,8 +102,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-
-
   services.flatpak.enable = true;
   services.greetd = {
     enable = true;
@@ -158,6 +156,7 @@
     };
   };
 
+  services.blueman.enable = true;
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -187,7 +186,6 @@
     neofetch
     git
     htop
-    any-nix-shell
     libvirt
     virt-manager
     spice
@@ -203,7 +201,7 @@
 
   # RTKIT pipewire related.
   security.rtkit.enable = true;
-  security.polkit.enable = true;
+  # security.polkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
