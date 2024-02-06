@@ -51,6 +51,7 @@ in  {
       discord
       docker-compose
       any-nix-shell
+      blender
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;

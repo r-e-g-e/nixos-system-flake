@@ -62,6 +62,11 @@
         when = "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor";
       }
       {
+        key = "ctrl+alt+i";
+        command = "editor.action.formatDocument";
+        when = "editorHasDocumentFormattingProvider";
+      }
+      {
         key = "f12";
         command = "-editor.action.revealDefinition";
         when = "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor";
@@ -80,7 +85,10 @@
       "editor.renderLineHighlight" = "all";
       "editor.semanticHighlighting.enabled" = true;
 
-      "[typescript].editor.defaultFormatter" = "esbenp.prettier-vscode";
+      "[typescript]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
+
       "typescript.preferences.importModuleSpecifier" = "relative";
       "javascript.preferences.importModuleSpecifier" = "relative";
       "workbench.iconTheme" = "material-icon-theme";
