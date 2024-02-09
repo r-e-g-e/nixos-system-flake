@@ -56,8 +56,11 @@
     nixPath = ["/etc/nix/path"];
     settings = {
       # Nix binary cache URLs
-      substituters = [ "https://cache.nixos.org/" "https://hyprland.cachix.org/" ];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+      substituters = [ "https://cache.nixos.org/" "https://hyprland.cachix.org/"];
+      trusted-public-keys = [
+        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      ];
+
       # Enable flakes and new 'nix' command
       experimental-features = ["nix-command" "flakes"];
       # Deduplicate and optimize nix store
@@ -159,6 +162,7 @@
   services.blueman.enable = true;
   hardware.bluetooth = {
     enable = true;
+    settings.general.Experimental = true;
     powerOnBoot = true;
   };
 
@@ -168,6 +172,8 @@
     jetbrains-mono
     noto-fonts-emoji
     victor-mono
+    noto-fonts
+    noto-fonts-cjk
   ];
 
   services.openssh = {

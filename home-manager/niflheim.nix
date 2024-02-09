@@ -47,11 +47,11 @@ in  {
   home = {
     username = "bunny";
     homeDirectory = "/home/bunny";
-    packages = with pkgs; [
-      discord
-      docker-compose
-      any-nix-shell
-      blender
+    packages = [
+      pkgs.discord
+      pkgs.docker-compose
+      pkgs.any-nix-shell
+      pkgs.blender
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;

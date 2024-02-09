@@ -95,6 +95,7 @@
       "workbench.startupEditor" = "none";
       "explorer.compactFolders" = false;
       "breadcrumbs.enabled" = false;
+      "php.validate.enable" = true;
     };
     extensions = with pkgs.vscode-extensions; [
       vscodevim.vim
