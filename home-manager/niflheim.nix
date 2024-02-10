@@ -52,6 +52,9 @@ in  {
       pkgs.docker-compose
       pkgs.any-nix-shell
       pkgs.blender
+      pkgs.jetbrains.phpstorm
+      pkgs.insomnia
+      pkgs.dbeaver
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;
