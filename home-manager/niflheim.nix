@@ -55,6 +55,8 @@ in  {
       pkgs.jetbrains.phpstorm
       pkgs.insomnia
       pkgs.dbeaver
+      pkgs.lutris
+      pkgs.wine
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;

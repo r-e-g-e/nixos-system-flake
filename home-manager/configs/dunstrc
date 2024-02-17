@@ -28,18 +28,3 @@
     mouse_left_click = do_action
     mouse_middle_click = close_all
     mouse_right_click = close_current
-
-[urgency_low]
-    background = "#!!{primary}88"
-    foreground = "#!!text"
-    frame_color = "#!!accent"
-
-[urgency_normal]
-    background = "#!!{primary}88"
-    foreground = "#!!text"
-    frame_color = "#!!accent"
-
-[urgency_critical]
-    background = "#!!{primary}88"
-    foreground = "#!!text"
-    frame_color = "#!!accent"
