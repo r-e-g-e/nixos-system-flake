@@ -84,6 +84,7 @@
       "editor.minimap.enabled" = false;
       "editor.renderLineHighlight" = "all";
       "editor.semanticHighlighting.enabled" = true;
+      "window.menuBarVisibility" = "toggle";
 
       "[typescript]" = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
