@@ -105,8 +105,10 @@
     pulse.enable = true;
   };
 
-  virtualisation.docker.enable = true;
-  programs.fish.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = false;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.baldur = {
@@ -115,9 +117,6 @@
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.fish;
   };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
