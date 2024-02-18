@@ -2,15 +2,15 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, outputs, ... }:
-{
+{ config, pkgs, inputs, outputs, lib, ... }: {
 
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../common/greetd.nix
-      inputs.home-manager.nixosModules.home-manager
-    ];
+  imports =[ 
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../common/nix.nix
+    ../common/fonts.nix
+    inputs.home-manager.nixosModules.home-manager
+  ];
 
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
@@ -19,13 +19,15 @@
     };
   };
 
-  # Enable flakes and "nix command"
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Setup keyfile
+  boot.initrd.secrets = {
+    "/crypto_keyfile.bin" = null;
+  };
 
   # Enable swap on luks
   boot.initrd.luks.devices."luks-52e017b3-980b-4c47-9349-cf8021a06c81".device = "/dev/disk/by-uuid/52e017b3-980b-4c47-9349-cf8021a06c81";
@@ -56,10 +58,11 @@
 
   # Enable the X11 windowing system.
   services.xserver = {
-    enable = false;
-    displayManager.gdm.enable = false;
-    desktopManager.gnome.enable = false;
+    enable = true;
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
   };
+  services.gnome.gnome-keyring.enable = true;
 
   services.auto-cpufreq = {
     enable = true;
@@ -81,7 +84,7 @@
   services.flatpak.enable = true;
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland];
   };
 
   # Configure keymap in X11

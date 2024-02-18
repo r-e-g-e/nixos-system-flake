@@ -20,6 +20,8 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     ../common/greetd.nix
+    ../common/nix.nix
+    ../common/fonts.nix
     inputs.home-manager.nixosModules.home-manager
   ];
 
@@ -27,51 +29,6 @@
     extraSpecialArgs = { inherit inputs outputs; };
     users = {
       bunny = import ../../home-manager/niflheim.nix;
-    };
-  };
-
-
-  nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
-    ];
-    config.allowUnfree = true;
-  };
-
-  # This will add each flake input as a registry
-  # To make nix3 commands consistent with your flake
-  nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
-
-  nix = {
-    # This will additionally add your inputs to the system's legacy channels
-    # Making legacy nix commands consistent as well, awesome!
-    nixPath = ["/etc/nix/path"];
-    settings = {
-      # Nix binary cache URLs
-      substituters = [ "https://cache.nixos.org/" "https://hyprland.cachix.org/"];
-      trusted-public-keys = [
-        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-      ];
-
-      # Enable flakes and new 'nix' command
-      experimental-features = ["nix-command" "flakes"];
-      # Deduplicate and optimize nix store
-      auto-optimise-store = true;
-    };
-
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
     };
   };
 
@@ -146,16 +103,6 @@
     settings.general.Experimental = true;
     powerOnBoot = true;
   };
-
-  fonts.fontDir.enable = true;
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" "DroidSansMono" ];})
-    jetbrains-mono
-    noto-fonts-emoji
-    victor-mono
-    noto-fonts
-    noto-fonts-cjk
-  ];
 
   services.openssh = {
     enable = false;
