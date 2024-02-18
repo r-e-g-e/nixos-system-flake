@@ -1,3 +1,4 @@
+
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
@@ -22,20 +23,6 @@ in  {
   ];
 
   nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
-    ];
-
-    # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
@@ -45,18 +32,14 @@ in  {
   };
 
   home = {
-    username = "bunny";
-    homeDirectory = "/home/bunny";
+    username = "baldur";
+    homeDirectory = "/home/baldur";
     packages = with pkgs; [
-      discord
+      webcord
       docker-compose
       any-nix-shell
-      blender
-      jetbrains.phpstorm
       insomnia
       dbeaver
-      lutris
-      wine
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;

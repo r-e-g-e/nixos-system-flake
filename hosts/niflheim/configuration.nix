@@ -19,6 +19,7 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    ../common/greetd.nix
     inputs.home-manager.nixosModules.home-manager
   ];
 
@@ -106,26 +107,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   services.flatpak.enable = true;
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session.command = ''
-        ${pkgs.greetd.tuigreet}/bin/tuigreet \
-        --time \
-        --asterisks \
-        --user-menu \
-        --cmd Hyprland
-      '';
-
-      kde_session.command = ''
-        ${pkgs.greetd.tuigreet}/bin/tuigreet \
-        --time \
-        --asterisks \
-        --user-menu \
-        --cmd startplasma-wayland
-      '';
-    };
-  };
 
   # environment.etc."greetd/environments".text = ''
   #   hyprland

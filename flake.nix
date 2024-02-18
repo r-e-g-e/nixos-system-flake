@@ -20,7 +20,14 @@
       niflheim = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./nixos/configuration.nix
+          ./hosts/niflheim/configuration.nix
+        ];
+      };
+
+      vanaheim = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./hosts/vanaheim/configuration.nix
         ];
       };
     };
@@ -30,6 +37,12 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [./home-manager/niflheim.nix];
+      };
+
+      "baldur@vanaheim" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [./home-manager/vanaheim.nix];
       };
     };
   };
