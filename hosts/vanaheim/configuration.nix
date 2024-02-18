@@ -2,8 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-
+{ config, pkgs, inputs, outputs, ... }:
 {
 
   imports =
@@ -13,6 +12,13 @@
       inputs.home-manager.nixosModules.home-manager
     ];
 
+  home-manager = {
+    extraSpecialArgs = { inherit inputs outputs; };
+    users = {
+      baldur = import ../../home-manager/vanaheim.nix;
+    };
+  };
+
   # Enable flakes and "nix command"
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -20,10 +26,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Setup keyfile
-  boot.initrd.secrets = {
-    "/crypto_keyfile.bin" = null;
-  };
 
   # Enable swap on luks
   boot.initrd.luks.devices."luks-52e017b3-980b-4c47-9349-cf8021a06c81".device = "/dev/disk/by-uuid/52e017b3-980b-4c47-9349-cf8021a06c81";
@@ -77,6 +79,10 @@
   services.blueman.enable = true;
 
   services.flatpak.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
   # Configure keymap in X11
   services.xserver = {
