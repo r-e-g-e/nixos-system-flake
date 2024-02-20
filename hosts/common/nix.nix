@@ -1,4 +1,4 @@
-{inputs, lib, ...}: {
+{inputs, lib, config, ...}: {
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -14,6 +14,14 @@
     ];
     config.allowUnfree = true;
   };
+
+  environment.etc =
+    lib.mapAttrs'
+    (name: value: {
+      name = "nix/path/${name}";
+      value.source = value.flake;
+    })
+    config.nix.registry;
 
   nix = {
     # This will add each flake input as a registry

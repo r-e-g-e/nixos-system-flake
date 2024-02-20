@@ -32,14 +32,6 @@
     };
   };
 
-  environment.etc =
-    lib.mapAttrs'
-    (name: value: {
-      name = "nix/path/${name}";
-      value.source = value.flake;
-    })
-    config.nix.registry;
-
   networking.hostName = "niflheim";
   networking.networkmanager.enable = true;
 
