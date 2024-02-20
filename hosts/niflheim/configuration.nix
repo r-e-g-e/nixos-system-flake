@@ -142,6 +142,8 @@
       cores = 4;
     };
 
+    waydroid.enable = true;
+
     libvirtd = {
       enable = true;
       qemu = {
