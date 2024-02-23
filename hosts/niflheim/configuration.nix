@@ -34,6 +34,10 @@
 
   networking.hostName = "niflheim";
   networking.networkmanager.enable = true;
+  networking.extraHosts = ''
+    172.18.0.3 crmtest
+    172.18.0.3 *.crmtest
+  '';
 
   time.timeZone = "America/Sao_Paulo";
   i18n = {

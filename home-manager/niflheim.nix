@@ -98,6 +98,8 @@ in  {
     enable = true;
     shellAliases = {
       ".." = "cd ..";
+      "l" = "ls -la";
+      "ll" = "ls -l";
     };
     interactiveShellInit = ''
       set fish_greeting
