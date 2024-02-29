@@ -57,6 +57,7 @@ in  {
       dbeaver
       lutris
       wine
+      yuzu
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;
