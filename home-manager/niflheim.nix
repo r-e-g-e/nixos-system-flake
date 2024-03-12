@@ -48,7 +48,7 @@ in  {
     username = "bunny";
     homeDirectory = "/home/bunny";
     packages = with pkgs; [
-      discord
+      webcord
       docker-compose
       any-nix-shell
       blender
