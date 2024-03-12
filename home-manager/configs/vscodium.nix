@@ -89,6 +89,9 @@
       "[typescript]" = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
+      "[typescriptreact]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
 
       "typescript.preferences.importModuleSpecifier" = "relative";
       "javascript.preferences.importModuleSpecifier" = "relative";
