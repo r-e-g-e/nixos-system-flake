@@ -6,6 +6,7 @@
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     systemd.enable = true;
     settings = {
+      monitor="HDMI-A-1,1920x1080,0x0,1";
       input = {
         kb_layout = "us";
         follow_mouse = 1;

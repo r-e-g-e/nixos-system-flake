@@ -100,7 +100,6 @@
       "explorer.compactFolders" = false;
       "breadcrumbs.enabled" = false;
       "php.validate.enable" = true;
-      "go.lintOnSave" = "off";
     };
     extensions = with pkgs.vscode-extensions; [
       vscodevim.vim

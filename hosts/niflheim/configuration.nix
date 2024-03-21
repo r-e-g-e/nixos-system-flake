@@ -19,7 +19,7 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
-    ../common/greetd.nix
+    # ../common/greetd.nix
     ../common/nix.nix
     ../common/fonts.nix
     inputs.home-manager.nixosModules.home-manager
@@ -34,10 +34,6 @@
 
   networking.hostName = "niflheim";
   networking.networkmanager.enable = true;
-  networking.extraHosts = ''
-    172.18.0.3 crmtest
-    172.18.0.3 *.crmtest
-  '';
 
   time.timeZone = "America/Sao_Paulo";
   i18n = {
@@ -65,6 +61,8 @@
   #   hyprland
   # '';    
 
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
   services.xserver.displayManager.defaultSession = "plasmawayland";
   environment.plasma5.excludePackages = with pkgs.libsForQt5; [
@@ -101,7 +99,7 @@
   };
 
   services.openssh = {
-    enable = false;
+    enable = true;
     settings = {
       # Forbid root login through SSH.
       PermitRootLogin = "no";
@@ -126,7 +124,7 @@
    
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk xdg-desktop-portal-hyprland ];
   };
 
   # RTKIT pipewire related.

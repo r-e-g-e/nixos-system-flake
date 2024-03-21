@@ -48,6 +48,7 @@ in  {
     username = "bunny";
     homeDirectory = "/home/bunny";
     packages = with pkgs; [
+      thunderbird
       webcord
       docker-compose
       any-nix-shell
