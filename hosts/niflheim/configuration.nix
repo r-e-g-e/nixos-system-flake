@@ -120,6 +120,8 @@
     spice-gtk
     spice-protocol
     gnome.adwaita-icon-theme
+    pamixer
+    pavucontrol
   ];
    
   xdg.portal = {
