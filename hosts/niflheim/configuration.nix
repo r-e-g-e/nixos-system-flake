@@ -52,8 +52,26 @@
   };
 
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    tmp.cleanOnBoot = true;
+
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+
+    plymouth = {
+      enable = true;
+      # black_hud circle_hud cross_hud square_hud
+      # circuit connect cuts_alt seal_2 seal_3
+      # theme = "connect";
+      # themePackages = with pkgs; [(
+      #   adi1090x-plymouth-themes.override {
+      #     selected_themes = [ theme ];
+      #   }
+      # )];
+    };
+  };
 
   services.flatpak.enable = true;
 
