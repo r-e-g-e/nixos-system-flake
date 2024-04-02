@@ -105,7 +105,7 @@
       description = "BunnY";
       shell = pkgs.fish;
       openssh.authorizedKeys.keys = [];
-      extraGroups = [ "networkmanager" "wheel" "docker" "disk"];
+      extraGroups = [ "networkmanager" "wheel" "docker" "disk" "libvirtd"];
     };
   };
 
@@ -132,7 +132,6 @@
     neofetch
     git
     htop
-    libvirt
     virt-manager
     spice
     spice-gtk
@@ -149,13 +148,16 @@
 
   # RTKIT pipewire related.
   security.rtkit.enable = true;
-  # security.polkit.enable = true;
+  security.polkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
+  programs.virt-manager.enable = true;
+  programs.dconf.enable = true;
 
   virtualisation = {
     # following configuration is added only when building VM with build-vm

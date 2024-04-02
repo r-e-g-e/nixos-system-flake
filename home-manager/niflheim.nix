@@ -68,6 +68,14 @@ in  {
     };
   };
 
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
+  };
+
+
   services.dunst = {
     enable = true;
     configFile = ./configs/dunstrc;
