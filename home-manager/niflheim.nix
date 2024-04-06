@@ -68,9 +68,9 @@ in{
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;
-      "~/.config/gtk-2.0/config.ini".text = gtkConfig;
-      "~/.config/gtk-3.0/config.ini".text = gtkConfig;
-      "~/.config/gtk-4.0/config.ini".text = gtkConfig;
+      # "~/.config/gtk-2.0/config.ini".text = gtkConfig;
+      # "~/.config/gtk-3.0/config.ini".text = gtkConfig;
+      # "~/.config/gtk-4.0/config.ini".text = gtkConfig;
     };
   };
 
@@ -82,6 +82,22 @@ in{
     "org/gnome/desktop/interface".color-scheme = "prefer-dark";
   };
 
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Breeze-Dark";
+      package = pkgs.libsForQt5.breeze-gtk;
+    };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+    style = {
+      name = "Breeze-Dark";
+      package = pkgs.libsForQt5.breeze-gtk;
+    };
+  };
 
   services.dunst = {
     enable = true;
