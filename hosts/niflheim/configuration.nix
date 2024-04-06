@@ -22,6 +22,7 @@
     # ../common/greetd.nix
     ../common/nix.nix
     ../common/fonts.nix
+    ../common/logind.nix
     inputs.home-manager.nixosModules.home-manager
   ];
 
@@ -62,41 +63,52 @@
         configurationLimit = 10;
       };
       efi.canTouchEfiVariables = true;
+      timeout = 2;
     };
 
-    plymouth = {
-      enable = false;
+    plymouth = rec {
+      enable = true;
       # black_hud circle_hud cross_hud square_hud
       # circuit connect cuts_alt seal_2 seal_3
-      # theme = "connect";
-      # themePackages = with pkgs; [(
-      #   adi1090x-plymouth-themes.override {
-      #     selected_themes = [ theme ];
-      #   }
-      # )];
+      theme = "circuit";
+      themePackages = with pkgs; [(
+        adi1090x-plymouth-themes.override {
+          selected_themes = [ theme ];
+        }
+      )];
     };
   };
 
   services.flatpak.enable = true;
 
-  # environment.etc."greetd/environments".text = ''
-  #   hyprland
-  # '';    
-
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-  services.xserver.displayManager.defaultSession = "plasmawayland";
-  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
-    elisa
-    gwenview
-    okular
-    oxygen
-    khelpcenter
-    konsole
-    plasma-browser-integration
-    print-manager
-  ];
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-tour
+    # gnome-music
+    # gnome-photos
+    # totem # video player
+  ]) ++ (with pkgs.gnome; [
+    gnome-maps
+    cheese # webcam tool
+    gnome-terminal
+    gedit # text editor
+    epiphany # web browser
+    geary # email reader
+    evince # document viewer
+    gnome-characters
+    tali # poker game
+    iagno # go game
+    hitori # sudoku game
+    atomix # puzzle game
+  ]);
+
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  };
 
   programs.fish.enable = true;
   programs.ssh.startAgent = true;
@@ -114,6 +126,7 @@
   };
 
   services.blueman.enable = true;
+  hardware.pulseaudio.enable = false;
   hardware.bluetooth = {
     enable = true;
     settings.general.Experimental = true;
@@ -147,7 +160,7 @@
    
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-gtk xdg-desktop-portal-hyprland ];
+    # extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   };
 
   # RTKIT pipewire related.

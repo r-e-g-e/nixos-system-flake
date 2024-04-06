@@ -7,18 +7,14 @@
   config,
   pkgs,
   ...
-}:let 
-  gtkConfig = ''
-  [Settings]
-  gtk-application-prefer-dark-theme=1
-  '';
-in  {
+}:{
   # You can import other home-manager modules here
 
   imports = [
     inputs.astal.homeManagerModules.default
     ./configs/hyprland.nix
     ./configs/vscodium.nix
+    ./configs/xdg.nix
     # ./configs/waybar.nix
   ];
 
@@ -53,25 +49,20 @@ in  {
       wf-recorder
       wl-clipboard
       wayshot
+      gnome.adwaita-icon-theme
+      papirus-icon-theme
 
       thunderbird
       webcord
-      docker-compose
       any-nix-shell
       blender
-      jetbrains.phpstorm
       insomnia
       dbeaver
       lutris
-      wine
-      yuzu
       # obsidian
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;
-      "~/.config/gtk-2.0/config.ini".text = gtkConfig;
-      "~/.config/gtk-3.0/config.ini".text = gtkConfig;
-      "~/.config/gtk-4.0/config.ini".text = gtkConfig;
     };
   };
 
@@ -80,6 +71,7 @@ in  {
       autoconnect = ["qemu:///system"];
       uris = ["qemu:///system"];
     };
+    "org/gnome/desktop/interface".color-scheme = "prefer-dark";
   };
 
 
@@ -89,6 +81,13 @@ in  {
   };
 
   services.blueman-applet.enable = true;
+
+  programs.astal = {
+    enable = true;
+    extraPackages = [
+      pkgs.libadwaita
+    ];
+  };
 
   programs.firefox.enable = true;
   programs.alacritty.enable = true;
