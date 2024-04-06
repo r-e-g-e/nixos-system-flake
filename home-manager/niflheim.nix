@@ -7,7 +7,12 @@
   config,
   pkgs,
   ...
-}:{
+}: let
+  gtkConfig = ''
+    [Settings]
+    gtk-application-prefer-dark-theme=1
+  '';
+in{
   # You can import other home-manager modules here
 
   imports = [
@@ -63,6 +68,9 @@
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;
+      "~/.config/gtk-2.0/config.ini".text = gtkConfig;
+      "~/.config/gtk-3.0/config.ini".text = gtkConfig;
+      "~/.config/gtk-4.0/config.ini".text = gtkConfig;
     };
   };
 
