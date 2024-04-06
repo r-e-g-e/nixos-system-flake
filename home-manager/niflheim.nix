@@ -16,9 +16,10 @@ in  {
   # You can import other home-manager modules here
 
   imports = [
+    inputs.astal.homeManagerModules.default
     ./configs/hyprland.nix
     ./configs/vscodium.nix
-    ./configs/waybar.nix
+    # ./configs/waybar.nix
   ];
 
   nixpkgs = {
@@ -48,6 +49,11 @@ in  {
     username = "bunny";
     homeDirectory = "/home/bunny";
     packages = with pkgs; [
+      slurp
+      wf-recorder
+      wl-clipboard
+      wayshot
+
       thunderbird
       webcord
       docker-compose
@@ -59,6 +65,7 @@ in  {
       lutris
       wine
       yuzu
+      # obsidian
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;

@@ -6,6 +6,7 @@
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     systemd.enable = true;
     settings = {
+      exec-once = ["asztal"];
       monitor="HDMI-A-1,1920x1080,0x0,1";
       input = {
         kb_layout = "us";
@@ -22,7 +23,7 @@
         layout = "dwindle";
       };
       misc = {
-        disable_hyprland_logo = false;
+        disable_hyprland_logo = true;
         disable_splash_rendering = false;
         mouse_move_enables_dpms = true;
         enable_swallow = true;

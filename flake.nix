@@ -3,9 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "github:hyprwm/Hyprland";
+    astal.url = "github:Aylur/astal";
+    # ags.url = "github:Aylur/ags";
   };
 
   outputs = {
@@ -20,6 +23,9 @@
       niflheim = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
+          # ({config,pkgs, ...}: { nixpkgs.overlays = [ final: prev: {
+          #   unstable
+          # } ]; })
           ./hosts/niflheim/configuration.nix
         ];
       };
