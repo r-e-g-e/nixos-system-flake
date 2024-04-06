@@ -34,6 +34,7 @@
 
   networking.hostName = "niflheim";
   networking.networkmanager.enable = true;
+  networking.extraHosts = "172.19.0.2 pushstart.hrtech";
 
   time.timeZone = "America/Sao_Paulo";
   i18n = {
@@ -64,7 +65,7 @@
     };
 
     plymouth = {
-      enable = true;
+      enable = false;
       # black_hud circle_hud cross_hud square_hud
       # circuit connect cuts_alt seal_2 seal_3
       # theme = "connect";
