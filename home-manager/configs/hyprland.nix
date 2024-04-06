@@ -1,10 +1,10 @@
 {inputs, pkgs, ...}: {
   wayland.windowManager.hyprland = {
-    enable = false;
-    # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    # xwayland.enable = true;
-    # enableNvidiaPatches = false;
-    # systemd.enable = true;
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    xwayland.enable = true;
+    enableNvidiaPatches = false;
+    systemd.enable = true;
     settings = {
       exec-once = ["asztal"];
       monitor="HDMI-A-1,1920x1080,0x0,1";
