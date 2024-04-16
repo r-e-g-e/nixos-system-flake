@@ -73,7 +73,7 @@
       }
       {
         key = "ctrl+shift+e";
-        command = "workbench.action.focusSideBar";
+        command = "workbench.action.openFolder";
         when = "editorTextFocus";
       }
     ];
