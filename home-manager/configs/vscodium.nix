@@ -71,6 +71,11 @@
         command = "-editor.action.revealDefinition";
         when = "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor";
       }
+      {
+        key = "ctrl+shift+e";
+        command = "workbench.action.focusSideBar";
+        when = "editorTextFocus";
+      }
     ];
     userSettings = {
       "telemetry.telemetryLevel" = "off";
