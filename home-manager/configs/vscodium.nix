@@ -73,8 +73,7 @@
       }
       {
         key = "ctrl+shift+e";
-        command = "workbench.action.openFolder";
-        when = "editorTextFocus";
+        command = "workbench.explorer.fileView.focus";
       }
     ];
     userSettings = {
