@@ -17,6 +17,7 @@ in  {
   # You can import other home-manager modules here
 
   imports = [
+    inputs.astal.homeManagerModules.default
     ./configs/hyprland.nix
     ./configs/vscodium.nix
     ./configs/waybar.nix
@@ -47,6 +48,30 @@ in  {
       "~/.config/gtk-3.0/config.ini".text = gtkConfig;
       "~/.config/gtk-4.0/config.ini".text = gtkConfig;
     };
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Breeze-Dark";
+      package = pkgs.libsForQt5.breeze-gtk;
+    };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+    style = {
+      name = "Breeze-Dark";
+      package = pkgs.libsForQt5.breeze-gtk;
+    };
+  };
+
+  programs.astal = {
+    enable = true;
+    extraPackages = [
+      pkgs.libadwaita
+    ];
   };
 
   services.dunst = {
