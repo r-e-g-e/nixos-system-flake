@@ -1,6 +1,6 @@
 {pkgs, ...}:{
   programs.waybar = {
-    enable = false;
+    enable = true;
     systemd.enable = true;
     systemd.target = "hyprland-session.target";
   };
