@@ -104,6 +104,7 @@
       "explorer.compactFolders" = false;
       "breadcrumbs.enabled" = false;
       "php.validate.enable" = true;
+      "codeium.enableCodeLens" = false;
     };
     extensions = with pkgs.vscode-extensions; [
       vscodevim.vim

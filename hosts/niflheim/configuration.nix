@@ -20,6 +20,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     # ../common/greetd.nix
+    # ../common/passthroughGPU.nix
     ../common/nix.nix
     ../common/fonts.nix
     ../common/logind.nix
@@ -35,7 +36,7 @@
 
   networking.hostName = "niflheim";
   networking.networkmanager.enable = true;
-  networking.extraHosts = "172.19.0.2 pushstart.hrtech";
+  networking.extraHosts = "172.30.0.2 pushstart.hrtech";
 
   time.timeZone = "America/Sao_Paulo";
   i18n = {
@@ -84,6 +85,14 @@
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+
+  services.xserver.desktopManager.plasma5.enable = true;
+  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+    plasma-browser-integration
+    konsole
+    oxygen
+  ];
+  programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.gnome.seahorse.out}/libexec/seahorse/ssh-askpass";
 
   environment.gnome.excludePackages = (with pkgs; [
     gnome-tour
@@ -139,7 +148,7 @@
       # Forbid root login through SSH.
       PermitRootLogin = "no";
       # Use keys only. Remove if you want to SSH using password (not recommended)
-      PasswordAuthentication = false;
+      PasswordAuthentication = true;
     };
   };
 
