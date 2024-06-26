@@ -59,6 +59,7 @@
       insomnia
       dbeaver
       lutris
+      logseq
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;
