@@ -37,6 +37,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.extraHosts = "172.20.128.2 pushstart.hrtech";
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
@@ -80,12 +81,18 @@
 
   # Enable the GNOME Desktop Environment.
   services.blueman.enable = true;
-
   services.flatpak.enable = true;
+
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland];
   };
+
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  };
+
+  programs.steam.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
