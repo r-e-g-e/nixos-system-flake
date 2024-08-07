@@ -36,7 +36,7 @@
 
   networking.hostName = "niflheim";
   networking.networkmanager.enable = true;
-  networking.extraHosts = "172.30.0.2 pushstart.hrtech";
+  networking.extraHosts = "172.20.128.2 pushstart.hrtech";
 
   time.timeZone = "America/Sao_Paulo";
   i18n = {
