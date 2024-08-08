@@ -31,6 +31,7 @@
     extraSpecialArgs = { inherit inputs outputs; };
     users = {
       bunny = import ../../home-manager/niflheim.nix;
+      kolab = import ../../home-manager/kolab.nix;
     };
   };
 
@@ -132,6 +133,14 @@
       openssh.authorizedKeys.keys = [];
       extraGroups = [ "networkmanager" "wheel" "docker" "disk" "libvirtd"];
     };
+    kolab = {
+      initialPassword = "password";
+      isNormalUser = true;
+      description = "Kolab";
+      shell = pkgs.fish;
+      openssh.authorizedKeys.keys = [];
+      extraGroups = [ "docker" ];
+    };
   };
 
   services.blueman.enable = true;
@@ -165,6 +174,10 @@
     gnome.adwaita-icon-theme
     pamixer
     pavucontrol
+    slurp
+    wf-recorder
+    wl-clipboard
+    papirus-icon-theme
   ];
    
   xdg.portal = {

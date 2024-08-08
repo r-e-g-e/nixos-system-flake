@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    pkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "github:hyprwm/Hyprland";
@@ -14,6 +14,7 @@
   outputs = {
     self,
     nixpkgs,
+    pkgs-unstable,
     home-manager,
     ...
   } @ inputs: let
@@ -31,7 +32,7 @@
       };
 
       vanaheim = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {inherit inputs outputs pkgs-unstable;};
         modules = [
           ./hosts/vanaheim/configuration.nix
         ];
