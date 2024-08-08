@@ -35,6 +35,10 @@
     enable = true;
     userName = "Rodrigo Tavares";
     userEmail = "rodrigo.tavares@kolab.com.br";
+    extraConfig = ''
+      [safe]
+      directory = *
+    '';
   };
 
   # Nicely reload system units when changing configs
