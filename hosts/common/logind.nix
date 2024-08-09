@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   services.logind.extraConfig = ''
     HandlePowerKey=suspend
     HandleLidSwitch=suspend

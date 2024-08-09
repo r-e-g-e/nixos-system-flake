@@ -1,4 +1,3 @@
-
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
@@ -8,12 +7,14 @@
   config,
   pkgs,
   ...
-}:let 
+}:
+let
   gtkConfig = ''
-  [Settings]
-  gtk-application-prefer-dark-theme=1
+    [Settings]
+    gtk-application-prefer-dark-theme=1
   '';
-in  {
+in
+{
   # You can import other home-manager modules here
 
   imports = [
@@ -87,7 +88,7 @@ in  {
   programs.home-manager.enable = true;
   programs.bat = {
     enable = true;
-    config = {};
+    config = { };
   };
   programs.git = {
     enable = true;

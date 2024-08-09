@@ -10,46 +10,57 @@
     # ags.url = "github:Aylur/ags";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    pkgs-unstable,
-    home-manager,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-  in {
-    nixosConfigurations = {
-      niflheim = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          # ({config,pkgs, ...}: { nixpkgs.overlays = [ final: prev: {
-          #   unstable
-          # } ]; })
-          ./hosts/niflheim/configuration.nix
-        ];
+  outputs =
+    {
+      self,
+      nixpkgs,
+      pkgs-unstable,
+      home-manager,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+    in
+    {
+      nixosConfigurations = {
+        niflheim = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [
+            # ({config,pkgs, ...}: { nixpkgs.overlays = [ final: prev: {
+            #   unstable
+            # } ]; })
+            ./hosts/niflheim/configuration.nix
+          ];
+        };
+
+        vanaheim = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs outputs pkgs-unstable;
+          };
+          modules = [
+            ./hosts/vanaheim/configuration.nix
+          ];
+        };
       };
 
-      vanaheim = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs pkgs-unstable;};
-        modules = [
-          ./hosts/vanaheim/configuration.nix
-        ];
+      homeConfigurations = {
+        "bunny@niflheim" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [ ./home-manager/niflheim.nix ];
+        };
+
+        "baldur@vanaheim" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [ ./home-manager/vanaheim.nix ];
+        };
       };
     };
-
-    homeConfigurations = {
-      "bunny@niflheim" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home-manager/niflheim.nix];
-      };
-
-      "baldur@vanaheim" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home-manager/vanaheim.nix];
-      };
-    };
-  };
 }

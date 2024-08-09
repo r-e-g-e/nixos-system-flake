@@ -1,4 +1,5 @@
-{pkgs, ...}:{
+{ pkgs, ... }:
+{
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -66,8 +67,8 @@
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
     };
     "org/gnome/desktop/interface".color-scheme = "prefer-dark";
     "org/gnome/desktop/interface".prefer-dark = true;
@@ -76,8 +77,8 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Breeze-Dark";
-      package = pkgs.libsForQt5.breeze-gtk;
+      name = "adwaita-dark";
+      package = pkgs.gnome.gnome-themes-extra;
     };
   };
 
@@ -85,8 +86,8 @@
     enable = true;
     platformTheme = "gtk";
     style = {
-      name = "Breeze-Dark";
-      package = pkgs.libsForQt5.breeze-gtk;
+      name = "adwaita-dark";
+      package = pkgs.gnome.gnome-themes-extra;
     };
   };
 
@@ -96,9 +97,9 @@
   programs.home-manager.enable = true;
   programs.bat = {
     enable = true;
-    config = {};
+    config = { };
   };
- 
+
   programs.starship = {
     enable = true;
     enableFishIntegration = true;

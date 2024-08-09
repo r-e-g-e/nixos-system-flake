@@ -1,12 +1,13 @@
-{inputs, pkgs, ...}: {
+{ inputs, pkgs, ... }:
+{
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
     enableNvidiaPatches = false;
     systemd.enable = true;
     settings = {
-      exec-once = ["asztal"];
-      monitor="HDMI-A-1,1920x1080,0x0,1";
+      exec-once = [ "asztal" ];
+      monitor = "HDMI-A-1,1920x1080,0x0,1";
       input = {
         kb_layout = "us";
         follow_mouse = 1;
@@ -39,14 +40,17 @@
         shadow_range = 0;
         shadow_render_power = 2;
         "col.shadow" = "0x66000000";
-        blurls = ["gtk-layer-shell" "lockscreen"];
+        blurls = [
+          "gtk-layer-shell"
+          "lockscreen"
+        ];
       };
 
       animations = {
         enabled = true;
 
         bezier = [
-          "overshot, 0.05, 0.9, 0.1, 1.05" 
+          "overshot, 0.05, 0.9, 0.1, 1.05"
           "smoothOut, 0.36, 0, 0.66, -0.56"
           "smoothIn, 0.25, 1, 0.5, 1"
         ];
@@ -128,7 +132,6 @@
         # brightness
         ",XF86MonBrightnessUp,exec,brightnessctl set 100+"
         ",XF86MonBrightnessDown,exec,brightnessctl set 100-"
-
 
         ################################## Window Management ###########################################
         "SUPER, Q, killactive"

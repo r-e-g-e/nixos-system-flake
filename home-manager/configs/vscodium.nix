@@ -1,4 +1,5 @@
-{pkgs, ...}:{
+{ pkgs, ... }:
+{
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium-fhs;
@@ -105,6 +106,21 @@
       "breadcrumbs.enabled" = false;
       "php.validate.enable" = true;
       "codeium.enableCodeLens" = false;
+
+      "nix" = {
+        "enableLanguageServer" = true;
+        "serverPath" = "nil";
+        "serverSettings" = {
+          "nil" = {
+            "diagnostics" = {
+              # "ignored" = ["unused_binding" "unused_with"];
+            };
+            "formatting" = {
+              "command" = [ "nixfmt" ];
+            };
+          };
+        };
+      };
     };
     extensions = with pkgs.vscode-extensions; [
       vscodevim.vim
@@ -115,6 +131,8 @@
       waderyan.gitblame
       editorconfig.editorconfig
       golang.go
+      jnoortheen.nix-ide
+      devsense.profiler-php-vscode
     ];
   };
 }

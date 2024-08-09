@@ -2,9 +2,17 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, outputs, lib, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  outputs,
+  lib,
+  ...
+}:
+{
 
-  imports =[ 
+  imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../common/nix.nix
@@ -13,12 +21,13 @@
   ];
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; };
+    extraSpecialArgs = {
+      inherit inputs outputs;
+    };
     users = {
       baldur = import ../../home-manager/vanaheim.nix;
     };
   };
-
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -100,7 +109,6 @@
     xkbVariant = "";
   };
 
-
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -123,7 +131,11 @@
   users.users.baldur = {
     isNormalUser = true;
     description = "Baldur";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
     shell = pkgs.fish;
   };
 

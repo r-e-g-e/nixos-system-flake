@@ -7,7 +7,8 @@
   config,
   pkgs,
   ...
-}:{
+}:
+{
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules from other flakes (such as nixos-hardware):
@@ -28,7 +29,9 @@
   ];
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; };
+    extraSpecialArgs = {
+      inherit inputs outputs;
+    };
     users = {
       bunny = import ../../home-manager/niflheim.nix;
       kolab = import ../../home-manager/kolab.nix;
@@ -42,7 +45,7 @@
   time.timeZone = "America/Sao_Paulo";
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    extraLocaleSettings = { 
+    extraLocaleSettings = {
       LC_ADDRESS = "pt_BR.UTF-8";
       LC_IDENTIFICATION = "pt_BR.UTF-8";
       LC_MEASUREMENT = "pt_BR.UTF-8";
@@ -54,7 +57,6 @@
       LC_TIME = "pt_BR.UTF-8";
     };
   };
-
 
   boot = {
     tmp.cleanOnBoot = true;
@@ -73,11 +75,11 @@
       # black_hud circle_hud cross_hud square_hud
       # circuit connect cuts_alt seal_2 seal_3
       theme = "circuit";
-      themePackages = with pkgs; [(
-        adi1090x-plymouth-themes.override {
+      themePackages = with pkgs; [
+        (adi1090x-plymouth-themes.override {
           selected_themes = [ theme ];
-        }
-      )];
+        })
+      ];
     };
   };
 
@@ -95,25 +97,27 @@
   ];
   programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.gnome.seahorse.out}/libexec/seahorse/ssh-askpass";
 
-  environment.gnome.excludePackages = (with pkgs; [
-    gnome-tour
-    # gnome-music
-    # gnome-photos
-    # totem # video player
-  ]) ++ (with pkgs.gnome; [
-    gnome-maps
-    cheese # webcam tool
-    gnome-terminal
-    gedit # text editor
-    epiphany # web browser
-    geary # email reader
-    evince # document viewer
-    gnome-characters
-    tali # poker game
-    iagno # go game
-    hitori # sudoku game
-    atomix # puzzle game
-  ]);
+  environment.gnome.excludePackages =
+    (with pkgs; [
+      gnome-tour
+      # gnome-music
+      # gnome-photos
+      # totem # video player
+    ])
+    ++ (with pkgs.gnome; [
+      gnome-maps
+      cheese # webcam tool
+      gnome-terminal
+      gedit # text editor
+      epiphany # web browser
+      geary # email reader
+      evince # document viewer
+      gnome-characters
+      tali # poker game
+      iagno # go game
+      hitori # sudoku game
+      atomix # puzzle game
+    ]);
 
   programs.hyprland = {
     enable = true;
@@ -129,15 +133,21 @@
       isNormalUser = true;
       description = "BunnY";
       shell = pkgs.fish;
-      openssh.authorizedKeys.keys = [];
-      extraGroups = [ "networkmanager" "wheel" "docker" "disk" "libvirtd"];
+      openssh.authorizedKeys.keys = [ ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "docker"
+        "disk"
+        "libvirtd"
+      ];
     };
     kolab = {
       initialPassword = "password";
       isNormalUser = true;
       description = "Kolab";
       shell = pkgs.fish;
-      openssh.authorizedKeys.keys = [];
+      openssh.authorizedKeys.keys = [ ];
       extraGroups = [ "docker" ];
     };
   };
@@ -178,7 +188,7 @@
     wl-clipboard
     papirus-icon-theme
   ];
-   
+
   xdg.portal = {
     enable = true;
     # extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
@@ -227,4 +237,3 @@
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
 }
-

@@ -8,7 +8,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   # You can import other home-manager modules here
 
   imports = [
@@ -21,17 +22,19 @@
   home = {
     username = "bunny";
     homeDirectory = "/home/bunny";
-    packages = (with pkgs; [
-      thunderbird
-      webcord
-      any-nix-shell
-      blender
-      dbeaver
-      lutris
-      logseq
-    ]) ++ (with inputs.pkgs-unstable.legacyPackages."${pkgs.system}"; [
-      hoppscotch
-    ]);
+    packages =
+      (with pkgs; [
+        thunderbird
+        webcord
+        any-nix-shell
+        blender
+        dbeaver
+        lutris
+        logseq
+      ])
+      ++ (with inputs.pkgs-unstable.legacyPackages."${pkgs.system}"; [
+        hoppscotch
+      ]);
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;
     };
@@ -56,6 +59,7 @@
     userName = "Rodrigo Tavares";
     userEmail = "rodrigo.tavares.lima@hotmail.com";
   };
+
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;

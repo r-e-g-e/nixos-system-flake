@@ -1,4 +1,3 @@
-
 {
   inputs,
   outputs,
@@ -6,7 +5,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./configs/waybar.nix
     ./configs/hyprland.nix
@@ -17,28 +17,26 @@
   home = {
     username = "kolab";
     homeDirectory = "/home/kolab";
-    packages = (with pkgs; [
-      webcord
-      discord
-      dbeaver
-      mysql-workbench
-      logseq
-      slack
+    packages =
+      (with pkgs; [
+        webcord
+        discord
+        dbeaver
+        mysql-workbench
+        logseq
+        slack
 
-      any-nix-shell
-    ]) ++ (with inputs.pkgs-unstable.legacyPackages."${pkgs.system}"; [
-      hoppscotch
-    ]);
+        any-nix-shell
+      ])
+      ++ (with inputs.pkgs-unstable.legacyPackages."${pkgs.system}"; [
+        hoppscotch
+      ]);
   };
 
   programs.git = {
     enable = true;
     userName = "Rodrigo Tavares";
     userEmail = "rodrigo.tavares@kolab.com.br";
-    extraConfig = ''
-      [safe]
-      directory = *
-    '';
   };
 
   # Nicely reload system units when changing configs
