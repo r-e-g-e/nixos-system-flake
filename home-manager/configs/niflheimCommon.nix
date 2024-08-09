@@ -74,11 +74,19 @@
     "org/gnome/desktop/interface".prefer-dark = true;
   };
 
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    name = "oreo_spark_violet_cursors";
+    package = pkgs.oreo-cursors-plus;
+    size = 16;
+  };
+
   gtk = {
     enable = true;
     theme = {
-      name = "adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
+      name = "Flat-Remix-GTK-Violet-Darkest";
+      package = pkgs.flat-remix-gtk;
     };
   };
 
@@ -86,8 +94,8 @@
     enable = true;
     platformTheme = "gtk";
     style = {
-      name = "adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
+      name = "Flat-Remix-GTK-Violet-Darkest";
+      package = pkgs.flat-remix-gtk;
     };
   };
 

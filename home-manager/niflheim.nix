@@ -3,9 +3,6 @@
 
 {
   inputs,
-  outputs,
-  lib,
-  config,
   pkgs,
   ...
 }:
@@ -40,29 +37,12 @@
     };
   };
 
-  services.dunst = {
-    enable = true;
-    configFile = ./configs/dunstrc;
-  };
-
   services.blueman-applet.enable = true;
-
-  programs.astal = {
-    enable = true;
-    extraPackages = [
-      pkgs.libadwaita
-    ];
-  };
 
   programs.git = {
     enable = true;
     userName = "Rodrigo Tavares";
     userEmail = "rodrigo.tavares.lima@hotmail.com";
-  };
-
-  programs.rofi = {
-    enable = true;
-    package = pkgs.rofi-wayland;
   };
 
   # Nicely reload system units when changing configs

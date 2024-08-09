@@ -1,14 +1,11 @@
 {
   inputs,
-  outputs,
-  lib,
-  config,
   pkgs,
   ...
 }:
 {
   imports = [
-    ./configs/waybar.nix
+    inputs.astal.homeManagerModules.default
     ./configs/hyprland.nix
     ./configs/vscodium.nix
     ./configs/niflheimCommon.nix
