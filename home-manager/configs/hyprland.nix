@@ -26,7 +26,7 @@
       exec-once = [ "asztal" ];
       monitor = [
         "HDMI-A-1,1920x1080,0x0,1"
-        "DP-1,3440x1440,0x0,1"
+        "DP-1,3440x1440@160,0x0,1"
       ];
       input = {
         kb_layout = "us";

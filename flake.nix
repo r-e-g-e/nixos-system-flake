@@ -7,7 +7,6 @@
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     astal.url = "github:Aylur/astal";
-    # ags.url = "github:Aylur/ags";
   };
 
   outputs =
@@ -28,9 +27,6 @@
             inherit inputs outputs;
           };
           modules = [
-            # ({config,pkgs, ...}: { nixpkgs.overlays = [ final: prev: {
-            #   unstable
-            # } ]; })
             ./hosts/niflheim/configuration.nix
           ];
         };
