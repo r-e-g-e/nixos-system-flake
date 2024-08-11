@@ -25,9 +25,10 @@
         webcord
         any-nix-shell
         blender
-        dbeaver
+        dbeaver-bin
         lutris
         logseq
+        discord
       ])
       ++ (with inputs.pkgs-unstable.legacyPackages."${pkgs.system}"; [
         hoppscotch
@@ -49,5 +50,5 @@
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 }

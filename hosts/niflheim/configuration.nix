@@ -103,12 +103,12 @@
       # gnome-music
       # gnome-photos
       # totem # video player
+      gedit # text editor
     ])
     ++ (with pkgs.gnome; [
       gnome-maps
       cheese # webcam tool
       gnome-terminal
-      gedit # text editor
       epiphany # web browser
       geary # email reader
       evince # document viewer
@@ -170,24 +170,29 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    mdadm
-    neovim
-    neofetch
-    git
-    htop
-    virt-manager
-    spice
-    spice-gtk
-    spice-protocol
-    gnome.adwaita-icon-theme
-    pamixer
-    pavucontrol
-    slurp
-    wf-recorder
-    wl-clipboard
-    papirus-icon-theme
-  ];
+  environment.systemPackages =
+    (with pkgs; [
+      mdadm
+      neovim
+      neofetch
+      git
+      htop
+      virt-manager
+      virtiofsd
+      spice
+      spice-gtk
+      spice-protocol
+      gnome.adwaita-icon-theme
+      pamixer
+      pavucontrol
+      slurp
+      wf-recorder
+      wl-clipboard
+      papirus-icon-theme
+    ])
+    ++ (with pkgs.gnomeExtensions; [
+      blur-my-shell
+    ]);
 
   xdg.portal = {
     enable = true;
@@ -231,9 +236,9 @@
 
   system.autoUpgrade = {
     enable = true;
-    channel = "https://nixos.org/channels/nixos-23.11";
+    channel = "https://nixos.org/channels/nixos-24.05";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }

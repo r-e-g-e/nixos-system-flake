@@ -62,7 +62,9 @@
       };
     };
 
-    configFile."mimeapps.list".force = true;
+    configFile = {
+      "mimeapps.list".force = true;
+    };
   };
 
   dconf.settings = {
@@ -70,8 +72,6 @@
       autoconnect = [ "qemu:///system" ];
       uris = [ "qemu:///system" ];
     };
-    "org/gnome/desktop/interface".color-scheme = "prefer-dark";
-    "org/gnome/desktop/interface".prefer-dark = true;
   };
 
   home.pointerCursor = {
@@ -92,7 +92,7 @@
 
   qt = {
     enable = true;
-    platformTheme = "gtk";
+    platformTheme.name = "gtk";
     style = {
       name = "Flat-Remix-GTK-Violet-Darkest";
       package = pkgs.flat-remix-gtk;

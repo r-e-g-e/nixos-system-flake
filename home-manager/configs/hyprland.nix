@@ -20,7 +20,6 @@
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    enableNvidiaPatches = false;
     systemd.enable = true;
     settings = {
       exec-once = [ "asztal" ];
