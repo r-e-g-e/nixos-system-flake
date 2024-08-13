@@ -72,6 +72,12 @@
       autoconnect = [ "qemu:///system" ];
       uris = [ "qemu:///system" ];
     };
+
+    "org/gnome/desktop/interface" = {
+      gtk-theme = "Breeze-Dark";
+      color-scheme = "prefer-dark";
+      prefer-dark = true;
+    };
   };
 
   home.pointerCursor = {
@@ -85,17 +91,29 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Flat-Remix-GTK-Violet-Darkest";
-      package = pkgs.flat-remix-gtk;
+      name = "Breeze-Dark";
+      package = pkgs.libsForQt5.breeze-gtk;
     };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.catppuccin-papirus-folders.override {
+        flavor = "mocha";
+        accent = "lavender";
+      };
+    };
+    cursorTheme = {
+      name = "oreo_spark_violet_cursors";
+      package = pkgs.oreo-cursors-plus;
+    };
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
   };
 
   qt = {
     enable = true;
     platformTheme.name = "gtk";
     style = {
-      name = "Flat-Remix-GTK-Violet-Darkest";
-      package = pkgs.flat-remix-gtk;
+      name = "gtk2";
+      package = pkgs.libsForQt5.breeze-qt5;
     };
   };
 
