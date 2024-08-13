@@ -89,7 +89,7 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.desktopManager.plasma5.enable = false;
   environment.plasma5.excludePackages = with pkgs.libsForQt5; [
     plasma-browser-integration
     konsole
