@@ -82,6 +82,7 @@
   # Enable the GNOME Desktop Environment.
   services.blueman.enable = true;
   services.flatpak.enable = true;
+  services.syncthing.enable = true;
 
   xdg.portal = {
     enable = true;
