@@ -126,6 +126,7 @@
       "networkmanager"
       "wheel"
       "docker"
+      "syncthing"
     ];
     shell = pkgs.fish;
   };

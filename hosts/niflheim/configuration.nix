@@ -141,6 +141,7 @@
         "docker"
         "disk"
         "libvirtd"
+        "syncthing"
       ];
     };
     kolab = {
