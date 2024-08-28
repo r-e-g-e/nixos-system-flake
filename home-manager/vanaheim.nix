@@ -21,7 +21,7 @@ in
     inputs.astal.homeManagerModules.default
     ./configs/hyprland.nix
     ./configs/vscodium.nix
-    ./configs/waybar.nix
+    ./configs/niflheimCommon.nix
   ];
 
   nixpkgs = {
@@ -45,26 +45,6 @@ in
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;
-      "~/.config/gtk-2.0/config.ini".text = gtkConfig;
-      "~/.config/gtk-3.0/config.ini".text = gtkConfig;
-      "~/.config/gtk-4.0/config.ini".text = gtkConfig;
-    };
-  };
-
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Breeze-Dark";
-      package = pkgs.libsForQt5.breeze-gtk;
-    };
-  };
-
-  qt = {
-    enable = true;
-    platformTheme = "gtk";
-    style = {
-      name = "Breeze-Dark";
-      package = pkgs.libsForQt5.breeze-gtk;
     };
   };
 
@@ -82,36 +62,10 @@ in
 
   services.blueman-applet.enable = true;
 
-  programs.firefox.enable = true;
-  programs.alacritty.enable = true;
-  programs.neovim.enable = true;
-  programs.home-manager.enable = true;
-  programs.bat = {
-    enable = true;
-    config = { };
-  };
   programs.git = {
     enable = true;
     userName = "Rodrigo Tavares";
     userEmail = "rodrigo.tavares.lima@hotmail.com";
-  };
-  programs.starship = {
-    enable = true;
-    enableFishIntegration = true;
-  };
-  programs.rofi = {
-    enable = true;
-    package = pkgs.rofi-wayland;
-  };
-  programs.fish = {
-    enable = true;
-    shellAliases = {
-      ".." = "cd ..";
-    };
-    interactiveShellInit = ''
-      set fish_greeting
-      any-nix-shell fish --info-right | source
-    '';
   };
 
   # Nicely reload system units when changing configs
