@@ -10,19 +10,12 @@
     package = pkgs.rofi-wayland;
   };
 
-  programs.astal = {
-    enable = true;
-    extraPackages = [
-      pkgs.libadwaita
-    ];
-  };
-
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
     systemd.enable = true;
     settings = {
-      exec-once = [ "asztal" ];
+      exec-once = [ "waybar" ];
       monitor = [
         "HDMI-A-1,1920x1080,0x0,1"
         "DP-1,3440x1440@160,0x0,1"

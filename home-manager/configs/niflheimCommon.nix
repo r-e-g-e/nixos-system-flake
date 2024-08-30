@@ -78,6 +78,15 @@
       color-scheme = "prefer-dark";
       prefer-dark = true;
     };
+
+    # "org/gnome/shell" = {
+    #   disable-user-extensions = false;
+    #   enable-extensions = with pkgs.gnomeExtensions; [
+    #     blur-my-shell
+    #     appindicator
+    #     permanent-notifications
+    #   ];
+    # };
   };
 
   home.pointerCursor = {

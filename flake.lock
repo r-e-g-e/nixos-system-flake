@@ -1,23 +1,5 @@
 {
   "nodes": {
-    "astal": {
-      "inputs": {
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1721074515,
-        "narHash": "sha256-jTwdQeGHEUMKNI4iIqUpgKbx9kNsY1y7/Vcxi3b2pzQ=",
-        "owner": "Aylur",
-        "repo": "astal",
-        "rev": "0e2a33b78ebaed008a5d496ab42cd9207cf48db4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Aylur",
-        "repo": "astal",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -40,22 +22,6 @@
       }
     },
     "nixpkgs": {
-      "locked": {
-        "lastModified": 1709237383,
-        "narHash": "sha256-cy6ArO4k5qTx+l5o+0mL9f5fa86tYUX3ozE1S+Txlds=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "1536926ef5621b09bba54035ae2bb6d806d72ac8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
       "locked": {
         "lastModified": 1723282977,
         "narHash": "sha256-oTK91aOlA/4IsjNAZGMEBz7Sq1zBS0Ltu4/nIQdYDOg=",
@@ -89,9 +55,8 @@
     },
     "root": {
       "inputs": {
-        "astal": "astal",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "pkgs-unstable": "pkgs-unstable"
       }
     }

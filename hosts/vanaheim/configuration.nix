@@ -26,6 +26,7 @@
     };
     users = {
       baldur = import ../../home-manager/vanaheim.nix;
+      kolab = import ../../home-manager/kolab.nix;
     };
   };
 
@@ -64,6 +65,29 @@
     desktopManager.gnome.enable = true;
   };
   services.gnome.gnome-keyring.enable = true;
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+
+  environment.gnome.excludePackages =
+    (with pkgs; [
+      gnome-tour
+      # gnome-music
+      # gnome-photos
+      # totem # video player
+      gedit # text editor
+    ])
+    ++ (with pkgs.gnome; [
+      gnome-maps
+      cheese # webcam tool
+      gnome-terminal
+      epiphany # web browser
+      geary # email reader
+      evince # document viewer
+      gnome-characters
+      tali # poker game
+      iagno # go game
+      hitori # sudoku game
+      atomix # puzzle game
+    ]);
 
   services.auto-cpufreq = {
     enable = true;
@@ -92,12 +116,10 @@
     enable = true;
   };
 
-  programs.steam.enable = true;
-
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
   # Enable sound with pipewire.
@@ -119,28 +141,43 @@
   programs.fish.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.baldur = {
-    isNormalUser = true;
-    description = "Baldur";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "docker"
-      "syncthing"
-    ];
-    shell = pkgs.fish;
-  };
+  users.users = {
+    baldur = {
+      isNormalUser = true;
+      description = "Baldur";
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "docker"
+        "syncthing"
+      ];
+      shell = pkgs.fish;
+    };
+    kolab = {
+      initialPassword = "password";
+      isNormalUser = true;
+      description = "Kolab";
+      shell = pkgs.fish;
+      openssh.authorizedKeys.keys = [ ];
+      extraGroups = [ "docker" ];
+    };
+};
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = (with pkgs; [
     rofi-wayland
     rofi-emoji
     xfce.thunar
     brightnessctl
     pamixer
     wl-clipboard
-  ];
+  ])
+  ++ (with pkgs.gnomeExtensions; [
+    blur-my-shell
+    appindicator
+    permanent-notifications
+  ]);
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -156,10 +193,11 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [];
+    allowedUDPPorts = [];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

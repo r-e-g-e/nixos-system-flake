@@ -13,5 +13,6 @@
     victor-mono
     noto-fonts
     noto-fonts-cjk
+    azeret-mono
   ];
 }

@@ -194,6 +194,8 @@
     ])
     ++ (with pkgs.gnomeExtensions; [
       blur-my-shell
+      appindicator
+      permanent-notifications
     ]);
 
   xdg.portal = {

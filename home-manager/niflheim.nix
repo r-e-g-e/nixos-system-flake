@@ -10,7 +10,6 @@
   # You can import other home-manager modules here
 
   imports = [
-    inputs.astal.homeManagerModules.default
     ./configs/hyprland.nix
     ./configs/vscodium.nix
     ./configs/niflheimCommon.nix

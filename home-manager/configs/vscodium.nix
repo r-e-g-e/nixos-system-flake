@@ -2,7 +2,7 @@
 {
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium-fhs;
+    package = pkgs.vscodium;
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = true;
     keybindings = [
@@ -82,7 +82,7 @@
       "telemetry.enableCrashReporter" = false;
       "telemetry.enableTelemetry" = false;
 
-      "editor.fontFamily" = "'victor mono', 'victor-mono', 'monospace', monospace";
+      "editor.fontFamily" = "azeret-mono, monospace";
       "editor.fontLigatures" = true;
       "editor.fontWeight" = "bold";
       "editor.lineNumbers" = "relative";
@@ -105,7 +105,6 @@
       "explorer.compactFolders" = false;
       "breadcrumbs.enabled" = false;
       "php.validate.enable" = true;
-      "codeium.enableCodeLens" = false;
 
       "nix" = {
         "enableLanguageServer" = true;
