@@ -23,9 +23,6 @@
         slack
 
         any-nix-shell
-      ])
-      ++ (with inputs.pkgs-unstable.legacyPackages."${pkgs.system}"; [
-        hoppscotch
       ]);
   };
 

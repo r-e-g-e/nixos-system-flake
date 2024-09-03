@@ -34,11 +34,16 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "vanaheim"; # Define your hostname.
+  networking = {
+    networkmanager = {
+      enable = true;
+      wifi.powersave = false;
+      wifi.backend = "iwd";
+    };
 
-  # Enable networking
-  networking.networkmanager.enable = true;
-  networking.extraHosts = "172.20.128.2 pushstart.hrtech";
+    hostName = "vanaheim"; # Define your hostname.
+    extraHosts = "172.20.128.2 pushstart.hrtech";
+  };
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";

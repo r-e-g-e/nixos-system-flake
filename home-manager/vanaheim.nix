@@ -38,10 +38,12 @@ in
     homeDirectory = "/home/baldur";
     packages = with pkgs; [
       webcord
+      discord
       docker-compose
       any-nix-shell
       insomnia
       dbeaver-bin
+      logseq
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;

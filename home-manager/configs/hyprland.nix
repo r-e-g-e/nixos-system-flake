@@ -122,6 +122,8 @@
       ];
 
       bind = [
+        "SUPER CTRL, X, hyprctl dispatch exit"
+
         "CTRL ALT, L, exec, swaylock"
         "SUPER, Return, exec, alacritty"
         "SUPER, W, exec, firefox"
