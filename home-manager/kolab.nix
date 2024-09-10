@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   ...
 }:
@@ -21,7 +20,7 @@
         mysql-workbench
         logseq
         slack
-
+        filezilla
         any-nix-shell
       ]);
   };

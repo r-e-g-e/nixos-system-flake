@@ -191,6 +191,7 @@
       wf-recorder
       wl-clipboard
       papirus-icon-theme
+      nil
     ])
     ++ (with pkgs.gnomeExtensions; [
       blur-my-shell

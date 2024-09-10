@@ -3,11 +3,9 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  config,
   pkgs,
   inputs,
   outputs,
-  lib,
   ...
 }:
 {
@@ -37,8 +35,8 @@
   networking = {
     networkmanager = {
       enable = true;
-      wifi.powersave = false;
-      wifi.backend = "iwd";
+      wifi.powersave = true;
+      wifi.backend = "wpa_supplicant";
     };
 
     hostName = "vanaheim"; # Define your hostname.
@@ -68,9 +66,21 @@
     enable = true;
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
+    desktopManager.plasma5.enable = false;
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
   };
+
   services.gnome.gnome-keyring.enable = true;
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+
+  environment.plasma5.excludePackages = with pkgs.kdePackages; [
+    plasma-browser-integration
+    konsole
+    oxygen
+  ];
 
   environment.gnome.excludePackages =
     (with pkgs; [
@@ -94,20 +104,6 @@
       atomix # puzzle game
     ]);
 
-  services.auto-cpufreq = {
-    enable = true;
-    settings = {
-      battery = {
-        governor = "powersave";
-        turbo = "auto";
-      };
-      charger = {
-        governor = "performance";
-        turbo = "always";
-      };
-    };
-  };
-
   # Enable the GNOME Desktop Environment.
   services.blueman.enable = true;
   services.flatpak.enable = true;
@@ -119,12 +115,6 @@
 
   programs.hyprland = {
     enable = true;
-  };
-
-  # Configure keymap in X11
-  services.xserver = {
-    xkb.layout = "us";
-    xkb.variant = "";
   };
 
   # Enable sound with pipewire.
@@ -166,7 +156,8 @@
       openssh.authorizedKeys.keys = [ ];
       extraGroups = [ "docker" ];
     };
-};
+  };
+  programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.gnome.seahorse.out}/libexec/seahorse/ssh-askpass";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -177,6 +168,7 @@
     brightnessctl
     pamixer
     wl-clipboard
+    nil
   ])
   ++ (with pkgs.gnomeExtensions; [
     blur-my-shell
@@ -211,5 +203,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
