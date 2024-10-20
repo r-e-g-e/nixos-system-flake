@@ -26,7 +26,7 @@
         blender
         dbeaver-bin
         lutris
-        logseq
+        # logseq
         discord
       ])
       ++ (with inputs.pkgs-unstable.legacyPackages."${pkgs.system}"; [

@@ -3,8 +3,6 @@
 {
   inputs,
   outputs,
-  lib,
-  config,
   pkgs,
   ...
 }:
@@ -26,7 +24,10 @@
     ../common/fonts.nix
     ../common/logind.nix
     inputs.home-manager.nixosModules.home-manager
+    inputs.aagl.nixosModules.default
   ];
+
+  programs.sleepy-launcher.enable = true;
 
   home-manager = {
     extraSpecialArgs = {

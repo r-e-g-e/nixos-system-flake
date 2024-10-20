@@ -18,7 +18,7 @@
         discord
         dbeaver-bin
         mysql-workbench
-        logseq
+        # logseq
         slack
         filezilla
         any-nix-shell
