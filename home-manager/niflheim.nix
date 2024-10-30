@@ -25,12 +25,10 @@
         any-nix-shell
         blender
         dbeaver-bin
-        lutris
-        # logseq
         discord
       ])
       ++ (with inputs.pkgs-unstable.legacyPackages."${pkgs.system}"; [
-        hoppscotch
+        logseq
       ]);
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;

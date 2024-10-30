@@ -120,6 +120,7 @@
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
+  hardware.opengl.driSupport32Bit = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -169,6 +170,7 @@
     pamixer
     wl-clipboard
     nil
+    protonvpn-gui
   ])
   ++ (with pkgs.gnomeExtensions; [
     blur-my-shell

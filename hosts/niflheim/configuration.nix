@@ -157,6 +157,7 @@
 
   services.blueman.enable = true;
   hardware.pulseaudio.enable = false;
+  hardware.opengl.driSupport32Bit = true;
   hardware.bluetooth = {
     enable = true;
     settings.general.Experimental = true;
@@ -193,6 +194,7 @@
       wl-clipboard
       papirus-icon-theme
       nil
+      protonvpn-gui
     ])
     ++ (with pkgs.gnomeExtensions; [
       blur-my-shell

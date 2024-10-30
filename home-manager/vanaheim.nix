@@ -43,7 +43,6 @@ in
       any-nix-shell
       insomnia
       dbeaver-bin
-      logseq
     ];
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;
