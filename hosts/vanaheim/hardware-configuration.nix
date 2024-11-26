@@ -14,25 +14,26 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/12adcb48-ccd2-4070-8891-d2a5316eddf2";
-      fsType = "ext4";
+    { device = "/dev/disk/by-uuid/13c655fa-a5c4-4e1d-8041-2cd26201e39c";
+      fsType = "btrfs";
+      options = [ "subvol=root" ];
     };
 
-  boot.initrd.luks.devices."luks-e66eeeb7-6a1f-4b48-bbcf-12e02367d962".device = "/dev/disk/by-uuid/e66eeeb7-6a1f-4b48-bbcf-12e02367d962";
+  boot.initrd.luks.devices."nixos".device = "/dev/disk/by-uuid/326325d8-0132-45fb-a351-f40551805081";
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/13c655fa-a5c4-4e1d-8041-2cd26201e39c";
+      fsType = "btrfs";
+      options = [ "subvol=home" ];
+    };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/1AB5-73D0";
+    { device = "/dev/nvme0n1p5";
       fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
+      options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  swapDevices =
-    [ 
-      { 
-        device = "/dev/nvme0n1p2";
-        randomEncryption.enable = true; 
-      }
-    ];
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

@@ -40,7 +40,7 @@
   programs.git = {
     enable = true;
     userName = "Rodrigo Tavares";
-    userEmail = "rodrigo.tavares.lima@hotmail.com";
+    userEmail = "rodrigo@noxis.com.br";
   };
 
   # Nicely reload system units when changing configs

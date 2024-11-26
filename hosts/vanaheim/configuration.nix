@@ -194,7 +194,9 @@
   # Open ports in the firewall.
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 8384 ];
+    allowedTCPPorts = [ 
+      8384 # Syncthing
+    ];
     allowedUDPPorts = [];
   };
 
