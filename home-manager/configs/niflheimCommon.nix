@@ -74,7 +74,6 @@
     };
 
     "org/gnome/desktop/interface" = {
-      gtk-theme = "Breeze-Dark";
       color-scheme = "prefer-dark";
       prefer-dark = true;
     };
@@ -100,8 +99,8 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Breeze-Dark";
-      package = pkgs.libsForQt5.breeze-gtk;
+      name = "Graphite-Dark";
+      package = pkgs.graphite-gtk-theme;
     };
     iconTheme = {
       name = "Papirus-Dark";
@@ -111,7 +110,7 @@
       };
     };
     cursorTheme = {
-      name = "oreo_spark_violet_cursors";
+      name = "oreo_spark_red_cursors";
       package = pkgs.oreo-cursors-plus;
     };
     gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
