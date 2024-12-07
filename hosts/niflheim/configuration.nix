@@ -34,7 +34,7 @@
       inherit inputs outputs;
     };
     users = {
-      bunny = import ../../home-manager/niflheim.nix;
+      bunny = import ../../home-manager/bunny.nix;
       kolab = import ../../home-manager/kolab.nix;
     };
   };
@@ -97,17 +97,16 @@
     konsole
     oxygen
   ];
-  programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.gnome.seahorse.out}/libexec/seahorse/ssh-askpass";
+  programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse.out}/libexec/seahorse/ssh-askpass";
 
-  environment.gnome.excludePackages =
-    (with pkgs; [
+  environment.gnome.excludePackages = (
+    with pkgs;
+    [
       gnome-tour
       # gnome-music
       # gnome-photos
       # totem # video player
       gedit # text editor
-    ])
-    ++ (with pkgs.gnome; [
       gnome-maps
       cheese # webcam tool
       gnome-terminal
@@ -119,7 +118,8 @@
       iagno # go game
       hitori # sudoku game
       atomix # puzzle game
-    ]);
+    ]
+  );
 
   programs.hyprland = {
     enable = true;
@@ -157,7 +157,7 @@
 
   services.blueman.enable = true;
   hardware.pulseaudio.enable = false;
-  hardware.opengl.driSupport32Bit = true;
+  hardware.graphics.enable32Bit = true;
   hardware.bluetooth = {
     enable = true;
     settings.general.Experimental = true;
@@ -186,7 +186,7 @@
       spice
       spice-gtk
       spice-protocol
-      gnome.adwaita-icon-theme
+      adwaita-icon-theme
       pamixer
       pavucontrol
       slurp
@@ -244,9 +244,9 @@
 
   system.autoUpgrade = {
     enable = true;
-    channel = "https://nixos.org/channels/nixos-24.05";
+    channel = "https://nixos.org/channels/nixos-24.11";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }

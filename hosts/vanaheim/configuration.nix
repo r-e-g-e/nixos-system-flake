@@ -23,7 +23,7 @@
       inherit inputs outputs;
     };
     users = {
-      baldur = import ../../home-manager/vanaheim.nix;
+      bunny = import ../../home-manager/bunny.nix;
       kolab = import ../../home-manager/kolab.nix;
     };
   };
@@ -89,8 +89,6 @@
       # gnome-photos
       # totem # video player
       gedit # text editor
-    ])
-    ++ (with pkgs.gnome; [
       gnome-maps
       cheese # webcam tool
       gnome-terminal
@@ -120,7 +118,7 @@
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
-  hardware.opengl.driSupport32Bit = true;
+  hardware.graphics.enable32Bit = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -138,9 +136,9 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
-    baldur = {
+    bunny = {
       isNormalUser = true;
-      description = "Baldur";
+      description = "Bunny";
       extraGroups = [
         "networkmanager"
         "wheel"
@@ -158,7 +156,7 @@
       extraGroups = [ "docker" ];
     };
   };
-  programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.gnome.seahorse.out}/libexec/seahorse/ssh-askpass";
+  programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse.out}/libexec/seahorse/ssh-askpass";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -206,5 +204,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 }

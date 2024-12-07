@@ -12,7 +12,7 @@
     noto-fonts-emoji
     victor-mono
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     azeret-mono
   ];
 }

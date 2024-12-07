@@ -2,11 +2,11 @@
   description = "Your new nix config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     pkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-24.05";
+    aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-24.11";
     aagl.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -48,15 +48,15 @@
           extraSpecialArgs = {
             inherit inputs outputs;
           };
-          modules = [ ./home-manager/niflheim.nix ];
+          modules = [ ./home-manager/bunny.nix ];
         };
 
-        "baldur@vanaheim" = home-manager.lib.homeManagerConfiguration {
+        "bunny@vanaheim" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
             inherit inputs outputs;
           };
-          modules = [ ./home-manager/vanaheim.nix ];
+          modules = [ ./home-manager/bunny.nix ];
         };
       };
     };

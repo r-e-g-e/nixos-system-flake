@@ -21,14 +21,13 @@
     packages =
       (with pkgs; [
         thunderbird
-        webcord
         any-nix-shell
         blender
         dbeaver-bin
         discord
       ])
       ++ (with inputs.pkgs-unstable.legacyPackages."${pkgs.system}"; [
-        logseq
+        # logseq
       ]);
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;
@@ -47,5 +46,5 @@
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 }
