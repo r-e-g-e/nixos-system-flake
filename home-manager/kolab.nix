@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   ...
 }:
@@ -10,11 +9,14 @@
     ./configs/niflheimCommon.nix
   ];
 
+  nixpkgs.config.permittedInsecurePackages = [ "electron-27.3.11" ]; #For LogSeq
+
   home = {
     username = "kolab";
     homeDirectory = "/home/kolab";
-    packages =
-      (with pkgs; [
+    packages = (
+      with pkgs;
+      [
         webcord
         discord
         dbeaver-bin
@@ -22,9 +24,9 @@
         slack
         filezilla
         any-nix-shell
-      ]) ++ (with inputs.pkgs-unstable.legacyPackages."${pkgs.system}"; [
-        # logseq
-      ]);
+        logseq
+      ]
+    );
   };
 
   programs.git = {

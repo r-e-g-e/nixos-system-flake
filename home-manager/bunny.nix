@@ -15,20 +15,22 @@
     ./configs/niflheimCommon.nix
   ];
 
+  nixpkgs.config.permittedInsecurePackages = [ "electron-27.3.11" ]; #For LogSeq
+
   home = {
     username = "bunny";
     homeDirectory = "/home/bunny";
-    packages =
-      (with pkgs; [
+    packages = (
+      with pkgs;
+      [
         thunderbird
         any-nix-shell
         blender
         dbeaver-bin
         discord
-      ])
-      ++ (with inputs.pkgs-unstable.legacyPackages."${pkgs.system}"; [
-        # logseq
-      ]);
+        logseq
+      ]
+    );
     file = {
       "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;
     };
