@@ -128,7 +128,6 @@
   programs.firefox.enable = true;
   programs.alacritty.enable = true;
   programs.neovim.enable = true;
-  programs.home-manager.enable = true;
   programs.bat = {
     enable = true;
     config = { };

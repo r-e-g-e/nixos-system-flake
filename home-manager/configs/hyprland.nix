@@ -46,12 +46,12 @@
         rounding = 8;
         active_opacity = 1.0;
         inactive_opacity = 1.0;
-        drop_shadow = true;
-        shadow_ignore_window = true;
-        shadow_offset = "0 0";
-        shadow_range = 0;
-        shadow_render_power = 2;
-        "col.shadow" = "0x66000000";
+        # drop_shadow = true;
+        # shadow_ignore_window = true;
+        # shadow_offset = "0 0";
+        # shadow_range = 0;
+        # shadow_render_power = 2;
+        # "col.shadow" = "0x66000000";
         blurls = [
           "gtk-layer-shell"
           "lockscreen"
@@ -79,7 +79,7 @@
       };
 
       dwindle = {
-        no_gaps_when_only = false;
+        # no_gaps_when_only = false;
         pseudotile = true; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
         preserve_split = true; # you probably want this
       };
@@ -122,7 +122,7 @@
       ];
 
       bind = [
-        "SUPER CTRL, X, hyprctl dispatch exit"
+        "SUPER CTRL, X, exec, ${pkgs.hyprland}/bin/hyprctl dispatch exit"
 
         "CTRL ALT, L, exec, swaylock"
         "SUPER, Return, exec, alacritty"
