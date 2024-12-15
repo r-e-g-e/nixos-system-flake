@@ -13,6 +13,7 @@
     ./configs/hyprland.nix
     ./configs/vscodium.nix
     ./configs/niflheimCommon.nix
+    ./configs/waybar.nix
   ];
 
   nixpkgs.config.permittedInsecurePackages = [ "electron-27.3.11" ]; #For LogSeq
@@ -29,6 +30,7 @@
         dbeaver-bin
         discord
         logseq
+        home-manager
       ]
     );
     file = {

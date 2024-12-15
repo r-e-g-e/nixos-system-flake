@@ -27,6 +27,9 @@
         logseq
       ]
     );
+    file = {
+      "~/.config/neofetch/config.conf".source = ./configs/neofetch.conf;
+    };
   };
 
   programs.git = {
