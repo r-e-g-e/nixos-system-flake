@@ -74,6 +74,7 @@
     };
 
     "org/gnome/desktop/interface" = {
+      gtk-theme = "Graphite-Dark";
       color-scheme = "prefer-dark";
       prefer-dark = true;
     };
