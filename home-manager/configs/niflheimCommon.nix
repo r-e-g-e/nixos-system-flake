@@ -1,4 +1,9 @@
 { pkgs, ... }:
+let
+  cursorThemeName = "oreo_spark_red_cursors";
+  themeName = "Graphite-Dark";
+  themePKG = pkgs.graphite-gtk-theme;
+in
 {
   nixpkgs = {
     # You can add overlays here
@@ -74,7 +79,7 @@
     };
 
     "org/gnome/desktop/interface" = {
-      gtk-theme = "Graphite-Dark";
+      gtk-theme = themeName;
       color-scheme = "prefer-dark";
       prefer-dark = true;
     };
@@ -92,16 +97,16 @@
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
-    name = "oreo_spark_violet_cursors";
-    package = pkgs.oreo-cursors-plus;
+    name = cursorThemeName;
+    package = themePKG;
     size = 16;
   };
 
   gtk = {
     enable = true;
     theme = {
-      name = "Graphite-Dark";
-      package = pkgs.graphite-gtk-theme;
+      name = themeName;
+      package = themePKG;
     };
     iconTheme = {
       name = "Papirus-Dark";
@@ -111,8 +116,9 @@
       };
     };
     cursorTheme = {
-      name = "oreo_spark_red_cursors";
+      name = cursorThemeName;
       package = pkgs.oreo-cursors-plus;
+      size = 16;
     };
     gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
   };
@@ -121,8 +127,8 @@
     enable = true;
     platformTheme.name = "gtk";
     style = {
-      name = "gtk2";
-      package = pkgs.libsForQt5.breeze-qt5;
+      name = themeName;
+      package = themePKG;
     };
   };
 
