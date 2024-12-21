@@ -152,7 +152,7 @@
       description = "Kolab";
       shell = pkgs.fish;
       openssh.authorizedKeys.keys = [ ];
-      extraGroups = [ "docker" ];
+      extraGroups = [ "docker" "syncthing" ];
     };
   };
   programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse.out}/libexec/seahorse/ssh-askpass";
