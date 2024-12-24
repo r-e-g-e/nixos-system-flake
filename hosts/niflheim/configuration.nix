@@ -215,6 +215,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
 
   programs.virt-manager.enable = true;

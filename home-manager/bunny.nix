@@ -31,6 +31,8 @@
         discord
         logseq
         home-manager
+        guitarix
+        tuxguitar
       ]
     );
     file = {
