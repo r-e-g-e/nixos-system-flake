@@ -1,4 +1,8 @@
 { pkgs, ... }:
+let
+  rofiEmojiTheme = pkgs.lib.cleanSource ./rofi-themes/emoji.rasi;
+  rofiLauncherTheme = pkgs.lib.cleanSource ./rofi-themes/launcher.rasi;
+in
 {
   services.dunst = {
     enable = true;
@@ -129,11 +133,10 @@
         "SUPER, W, exec, firefox"
         "SUPER, N, exec, thunar"
         "SUPER, M, exec, codium"
-        "SUPER, D, exec, sh ~/.config/waybar/scripts/launcher.sh"
-        "SUPERSHIFT, P, exec,  sh ~/.config/waybar/scripts/power-profiles"
-        "SUPER, E, exec, rofi -modi emoji -show emoji -theme ~/.config/waybar/scripts/rofi/emoji.rasi"
-        "SUPER SHIFT, E, exec, sh ~/.config/waybar/scripts/powermenu.sh"
-        "SUPER SHIFT, P, exec, sh ~/.config/waybar/scripts/"
+
+        "SUPER, D, exec, rofi -no-config -no-lazy-grab -show drun -modi drun -theme ${rofiLauncherTheme}"
+        "SUPER, E, exec, rofi -modi emoji -show emoji -theme ${rofiEmojiTheme}"
+        # "SUPER SHIFT, E, exec, sh ~/.config/waybar/scripts/powermenu.sh"
 
         ###########################
         # Volume and brightness  #
