@@ -74,7 +74,7 @@
   };
 
   services.gnome.gnome-keyring.enable = true;
-  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+  services.udev.packages = [ pkgs.gnome-settings-daemon ];
 
   environment.plasma5.excludePackages = with pkgs.kdePackages; [
     plasma-browser-integration

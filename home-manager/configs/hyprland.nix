@@ -23,6 +23,7 @@ in
       monitor = [
         "HDMI-A-1,1920x1080,0x0,1"
         "DP-1,3440x1440@160,0x0,1"
+        "eDP-1,1920x1200,0x0,1.2" # thinkpad
       ];
       input = {
         kb_layout = "us";
