@@ -102,7 +102,6 @@
       atomix # puzzle game
     ]);
 
-  # Enable the GNOME Desktop Environment.
   services.blueman.enable = true;
   services.flatpak.enable = true;
   services.syncthing.enable = true;
@@ -193,7 +192,7 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 
-      8384 # Syncthing
+      21027 # Syncthing
     ];
     allowedUDPPorts = [];
   };

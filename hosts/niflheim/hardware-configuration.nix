@@ -8,7 +8,7 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
@@ -30,10 +30,10 @@
       fsType = "ext4";
     };
 
-  #fileSystems."/media/chungus" =
-  #  { device = "/dev/disk/by-uuid/cc5b181f-c2f6-4ad5-96e1-226162c0b05c";
-  #    fsType = "ext4";
-  #  };
+  fileSystems."/media/files" =
+    { device = "/dev/disk/by-uuid/b1f1c1c1-e95d-4072-9f28-5b1bfd78bac4";
+      fsType = "ext4";
+    };
 
   swapDevices = [ ];
 
@@ -42,13 +42,14 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.br-c81f00d6fbea.useDHCP = lib.mkDefault true;
+  # networking.interfaces.br-e1884d47be98.useDHCP = lib.mkDefault true;
+  # networking.interfaces.br-eaea0626c63f.useDHCP = lib.mkDefault true;
+  # networking.interfaces.docker0.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp10s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.virbr0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp9s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  boot.swraid.enable = true;
-
-
 }
