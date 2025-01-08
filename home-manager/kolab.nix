@@ -26,6 +26,8 @@
         filezilla
         any-nix-shell
         logseq
+        libreoffice
+        insomnia
       ]
     );
     file = {
