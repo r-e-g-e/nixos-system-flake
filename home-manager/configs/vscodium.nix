@@ -103,6 +103,13 @@
 
       "typescript.preferences.importModuleSpecifier" = "relative";
       "javascript.preferences.importModuleSpecifier" = "relative";
+
+      "javascript.inlayHints.parameterNames.enabled" = "all";
+
+      "typescript.inlayHints.parameterNames.enabled" = "all";
+      "typescript.inlayHints.variableTypes.enabled" = true;
+      "typescript.inlayHints.functionLikeReturnTypes.enabled" = true;
+
       "workbench.iconTheme" = "material-icon-theme";
       "workbench.startupEditor" = "none";
       "explorer.compactFolders" = false;
