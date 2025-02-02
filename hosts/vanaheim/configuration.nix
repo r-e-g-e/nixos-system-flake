@@ -40,7 +40,10 @@
     };
 
     hostName = "vanaheim"; # Define your hostname.
-    extraHosts = "172.20.128.2 pushstart.hrtech";
+    extraHosts = ''
+      172.20.128.2 pushstart.hrtech
+      192.168.18.100 niflheim
+    '';
   };
 
   # Set your time zone.
