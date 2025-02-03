@@ -129,9 +129,16 @@
     jack.enable = true;
   };
 
-  virtualisation.docker = {
-    enable = true;
-    enableOnBoot = false;
+  virtualisation = {
+    vmVariant.virtualisation = {
+      memorySize = 2048;
+      cores = 2;
+    };
+
+    docker = {
+      enable = true;
+      enableOnBoot = false;
+    };
   };
 
   programs.fish.enable = true;

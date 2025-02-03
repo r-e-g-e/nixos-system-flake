@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }:
 {
@@ -21,7 +22,7 @@
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 80 ];
+      allowedTCPPorts = [ 80 22 ];
       allowedUDPPorts = [ ];
     };
   };
@@ -51,27 +52,40 @@
   programs.fish.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users = {
-    angel = {
-      initialPassword = "password";
-      isNormalUser = true;
-      description = "Angel";
-      extraGroups = [
-        "wheel"
-        "docker"
-      ];
-      shell = pkgs.fish;
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMkXauaeJuijZTqWe5ijUAtKX84rRwq6yrAHqjmsONK8"
-      ];
+  users = {
+    users = {
+      angel = {
+        initialPassword = "password";
+        isNormalUser = true;
+        description = "Angel";
+        extraGroups = [
+          "wheel"
+          "docker"
+        ];
+        shell = pkgs.fish;
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMkXauaeJuijZTqWe5ijUAtKX84rRwq6yrAHqjmsONK8"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMSJYhJUlTKGbruCs7AckLpdx6aveGwTxfwDka/aIONx"
+        ];
+      };
+      gitlab = {
+        isSystemUser = true;
+        group = "gitlab";
+        extraGroups = [ "db" ];
+      };
+      db = {
+        isSystemUser = true;
+        group = "db";
+      };
     };
-    gitlab = {
-      isSystemUser = true;
-      group = "gitlab";
+
+    groups.gitlab = {
+      name = "gitlab";
+      members = [ "gitlab" ];
     };
-    db = {
-      isSystemUser = true;
-      group = "mysql";
+    groups.db = {
+      name = "db";
+      members = [ "gitlab" "db" ];
     };
   };
 
@@ -83,15 +97,55 @@
     ]
   );
 
-  sops = {
-    age.keyFile = "/home/bunny/.config/sops/age/keys.txt";
-    secrets."gitlab" = {
-      owner = "gitlab";
-      group = "gitlab";
-      sopsFile = ./asidf;
-      format = "yaml";
-    };
-  };
+  # sops = {
+    # age.keyFile = "/home/angel/.config/sops/age/keys.txt";
+    # templates = {
+    #   "gitlab.yaml".content = ''
+    #   gitlab:
+    #     - optFile: "asdf"
+    #       secretFile: "asdf"
+    #       initialRootPasswordFile: "aodsf"
+    #       dbFile: "asdfas"
+    #       jwsFile: "asfas"
+    #   '';
+    # };
+  #   secrets."postgres/password" = {
+  #     owner = "db";
+  #     group = "db";
+  #     sopsFile = ./.secrets/postgres.yaml;
+  #     format = "yaml";
+  #   };
+  #   secrets."gitlab/optFile" = {
+  #     owner = "gitlab";
+  #     group = "gitlab";
+  #     sopsFile = ./.secrets/gitlab.yaml;
+  #     format = "yaml";
+  #   };
+  #   secrets."gitlab/secretFile" = {
+  #     owner = "gitlab";
+  #     group = "gitlab";
+  #     sopsFile = ./.secrets/gitlab.yaml;
+  #     format = "yaml";
+  #   };
+  #   secrets."gitlab/initialRootPassword" = {
+  #     owner = "gitlab";
+  #     group = "gitlab";
+  #     sopsFile = ./.secrets/gitlab.yaml;
+  #     format = "yaml";
+  #   };
+  #   secrets."gitlab/dbFile" = {
+  #     owner = "gitlab";
+  #     group = "gitlab";
+  #     sopsFile = ./.secrets/gitlab.yaml;
+  #     format = "yaml";
+  #   };
+  #   secrets."gitlab/jwsFile" = {
+  #     owner = "gitlab";
+  #     group = "gitlab";
+  #     sopsFile = ./.secrets/gitlab.yaml;
+  #     format = "yaml";
+  #   };
+  # };
 
   services = {
     openssh = {
@@ -127,26 +181,26 @@
       user = "gitlab";
     };
 
-    gitlab = {
-      enable = true;
-      redisUrl = "unix:/run/redis-gitlab/redis.sock";
-      port = 8081;
-      databaseName = "gitlab";
-      databaseUsername = "gitlab";
-      databaseHost = "127.0.0.1:5432";
-      # TODO for PROD remove this temp passwords and configure proper password files and secrets with sops
-      databasePasswordFile = pkgs.writeText "dbPassword" "zgvcyfwsxzcwr85l";
-      initialRootPasswordFile = pkgs.writeText "rootPassword" "dakqdvp4ovhksxer";
-      secrets = {
-        secretFile = pkgs.writeText "secret" "Aig5zaic";
-        otpFile = pkgs.writeText "otpsecret" "Riew9mue";
-        dbFile = pkgs.writeText "dbsecret" "we2quaeZ";
-        jwsFile = pkgs.runCommand "oidcKeyBase" { } "${pkgs.openssl}/bin/openssl genrsa 2048 > $out";
-      };
-    };
+    # gitlab = {
+    #   enable = false;
+    #   redisUrl = "unix:/run/redis-gitlab/redis.sock";
+    #   port = 8081;
+    #   databaseName = "gitlab";
+    #   databaseUsername = "gitlab";
+    #   databaseHost = "127.0.0.1:5432";
+    #   # TODO for PROD remove this temp passwords and configure proper password files and secrets with sops
+    #   databasePasswordFile = config.sops.templates.".toml".path;
+    #   initialRootPasswordFile = /run/secrets/gitlab/initialRootPassword;
+    #   secrets = {
+    #     secretFile = /run/secrets/gitlab/secretFile;
+    #     otpFile = /run/secrets/gitlab/optFile;
+    #     dbFile = /run/secrets/gitlab/dbFile;
+    #     jwsFile = /run/secrets/gitlab/jwsFile;
+    #   };
+    # };
 
     jenkins = {
-      enable = true;
+      enable = false;
       port = 8080;
     };
 
@@ -162,18 +216,18 @@
           forceSSL = false;
           locations."/".return = "200 \"Hello from noxis!\"";
         };
-        gitlab = {
-          serverName = "git.noxis.com.br";
-          forceSSL = false;
-          enableACME = false;
-          locations."/".proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
-        };
-        jenkins = {
-          serverName = "ci.noxis.com.br";
-          forceSSL = false;
-          enableACME = false;
-          locations."/".proxyPass = "http://127.0.0.1:8080";
-        };
+        # gitlab = {
+        #   serverName = "git.noxis.com.br";
+        #   forceSSL = false;
+        #   enableACME = false;
+        #   locations."/".proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
+        # };
+        # jenkins = {
+        #   serverName = "ci.noxis.com.br";
+        #   forceSSL = false;
+        #   enableACME = false;
+        #   locations."/".proxyPass = "http://127.0.0.1:8080";
+        # };
       };
     };
   };
