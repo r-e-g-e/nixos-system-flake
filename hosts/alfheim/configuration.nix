@@ -67,11 +67,11 @@
     };
     gitlab = {
       isSystemUser = true;
-      extraGroups = [ "gitlab" ];
+      group = "gitlab";
     };
-    mysql = {
+    db = {
       isSystemUser = true;
-      extraGroups = [ "mysql" ];
+      group = "mysql";
     };
   };
 
@@ -82,6 +82,16 @@
       wget
     ]
   );
+
+  sops = {
+    age.keyFile = "/home/bunny/.config/sops/age/keys.txt";
+    secrets."gitlab" = {
+      owner = "gitlab";
+      group = "gitlab";
+      sopsFile = ./asidf;
+      format = "yaml";
+    };
+  };
 
   services = {
     openssh = {
@@ -96,7 +106,7 @@
     mysql = {
       enable = false;
       package = pkgs.mariadb;
-      user = "mysql";
+      user = "db";
       dataDir = "/var/lib/mysql";
       initialDatabases = [ { name = "noxis"; } ];
     };
@@ -104,17 +114,22 @@
     postgresql = {
       enable = true;
       package = pkgs.postgresql_17;
-      ensureDatabases = [
-        "noxis"
-        "gitlab"
-      ];
-      ensureUsers = [ { name= "gitlab";}];
+      ensureDatabases = [ "gitlab" ];
+      ensureUsers = [ { name = "gitlab"; } ];
       port = 5432;
       dataDir = "/var/lib/postgresql/17";
     };
 
+    redis.servers.gitlab = {
+      enable = true;
+      openFirewall = false;
+      group = "gitlab";
+      user = "gitlab";
+    };
+
     gitlab = {
       enable = true;
+      redisUrl = "unix:/run/redis-gitlab/redis.sock";
       port = 8081;
       databaseName = "gitlab";
       databaseUsername = "gitlab";
