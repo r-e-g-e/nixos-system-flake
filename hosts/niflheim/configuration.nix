@@ -44,6 +44,13 @@
     192.168.18.101 vanaheim
   '';
 
+  sops = {
+    defaultSopsFile = ./.secrets/example_secrets.json;
+    defaultSopsFormat = "json";
+    age.keyFile = "/home/bunny/.config/sops/age/keys.txt";
+    secrets."example_key" = {};
+  };
+
   time.timeZone = "America/Sao_Paulo";
   i18n = {
     defaultLocale = "en_US.UTF-8";

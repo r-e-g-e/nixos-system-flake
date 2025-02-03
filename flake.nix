@@ -8,7 +8,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-24.11";
     aagl.inputs.nixpkgs.follows = "nixpkgs";
-    inputs.sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
   outputs =
