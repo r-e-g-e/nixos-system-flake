@@ -60,7 +60,7 @@
     };
 
     gc = {
-      automatic = true;
+      automatic = false;
       dates = "monthly";
       options = "--delete-older-than 60d";
     };

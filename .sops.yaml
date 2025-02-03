@@ -1,0 +1,7 @@
+keys:
+  - &niflheim age1zw2h2vpmy0qulh5x66573l9edzah0d08mvkw6wlzxepc9k3hwdjq9vmdcd
+creation_rules:
+  - path_regex: hosts\/niflheim.*\.secrets.*\.(json|yaml)
+    key_groups:
+    - age:
+      - *niflheim

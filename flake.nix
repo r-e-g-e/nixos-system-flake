@@ -8,6 +8,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-24.11";
     aagl.inputs.nixpkgs.follows = "nixpkgs";
+    inputs.sops-nix.url = "github:Mic92/sops-nix";
   };
 
   outputs =
@@ -16,6 +17,8 @@
       nixpkgs,
       pkgs-unstable,
       home-manager,
+      sops-nix,
+      aagl,
       ...
     }@inputs:
     let
@@ -29,6 +32,9 @@
           };
           modules = [
             ./hosts/niflheim/configuration.nix
+            home-manager.nixosModules.home-manager
+            aagl.nixosModules.default
+            sops-nix.nixosModules.sops
           ];
         };
 
@@ -38,6 +44,16 @@
           };
           modules = [
             ./hosts/vanaheim/configuration.nix
+          ];
+        };
+
+        alfheim = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [
+            ./hosts/alfheim/configuration.nix
+            sops-nix.nixosModules.sops
           ];
         };
       };

@@ -23,8 +23,6 @@
     ../common/nix.nix
     ../common/fonts.nix
     ../common/logind.nix
-    inputs.home-manager.nixosModules.home-manager
-    inputs.aagl.nixosModules.default
   ];
 
   programs.sleepy-launcher.enable = true;
@@ -173,7 +171,7 @@
       # Forbid root login through SSH.
       PermitRootLogin = "no";
       # Use keys only. Remove if you want to SSH using password (not recommended)
-      PasswordAuthentication = true;
+      PasswordAuthentication = false;
     };
   };
 
