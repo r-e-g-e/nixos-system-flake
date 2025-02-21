@@ -90,6 +90,8 @@
       "editor.renderLineHighlight" = "all";
       "editor.semanticHighlighting.enabled" = true;
       "window.menuBarVisibility" = "toggle";
+      "window.titleBarStyle" = "custom";
+      "window.customMenuBarAltFocus" = false;
 
       "[typescript]" = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";

@@ -148,8 +148,8 @@ in
         ",XF86AudioLowerVolume,exec,pamixer -d 5"
         ",XF86AudioMute,exec,pamixer -t"
         # brightness
-        ",XF86MonBrightnessUp,exec,brightnessctl set 100+"
-        ",XF86MonBrightnessDown,exec,brightnessctl set 100-"
+        ",XF86MonBrightnessUp,exec,brightnessctl set 25+"
+        ",XF86MonBrightnessDown,exec,brightnessctl set 25-"
 
         ################################## Window Management ###########################################
         "SUPER, Q, killactive"
