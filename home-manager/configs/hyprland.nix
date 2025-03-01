@@ -116,8 +116,7 @@ in
         "float, title:wlogout"
         "fullscreen, title:wlogout"
         "idleinhibit focus, mpv"
-        "idleinhibit fullscreen, firefox"
-        "idleinhibit fullscreen, firefox-developer-edition"
+        "idleinhibit fullscreen, librewolf"
         "float, title:^(Media viewer)$"
         "float, title:^(Volume Control)$"
         "float, title:^(Picture-in-Picture)$"
@@ -131,7 +130,7 @@ in
 
         "CTRL ALT, L, exec, swaylock"
         "SUPER, Return, exec, alacritty"
-        "SUPER, W, exec, firefox"
+        "SUPER, W, exec, librewolf"
         "SUPER, N, exec, thunar"
         "SUPER, M, exec, codium"
 

@@ -6,7 +6,7 @@
   imports = [
     ./configs/hyprland.nix
     ./configs/vscodium.nix
-    ./configs/niflheimCommon.nix
+    ./configs/userCommon.nix
     ./configs/waybar.nix
   ];
 
@@ -18,7 +18,6 @@
     packages = (
       with pkgs;
       [
-        webcord
         discord
         dbeaver-bin
         mysql-workbench
