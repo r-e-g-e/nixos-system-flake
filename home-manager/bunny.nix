@@ -12,7 +12,7 @@
   imports = [
     ./configs/hyprland.nix
     ./configs/vscodium.nix
-    ./configs/niflheimCommon.nix
+    ./configs/userCommon.nix
     ./configs/waybar.nix
   ];
 
