@@ -46,9 +46,9 @@ in
       enable = true;
       associations.added = {
         "inode/directory" = "nautilus.desktop";
-        "application/pdf" = "librewolf.desktop";
-        "text/html" = "librewolf.desktop";
-        "text/xml" = "librewolf.desktop";
+        "application/pdf" = "firefox.desktop";
+        "text/html" = "firefox.desktop";
+        "text/xml" = "firefox.desktop";
         # Add your custom mimetype entry for file paths here
         # "text/plain" = "gedit.desktop";  # Example for text files
         # "image/jpeg" = "gthumb.desktop";  # Example for JPEG images
@@ -123,7 +123,7 @@ in
     };
   };
 
-  programs.librewolf.enable = true;
+  programs.firefox.enable = true;
   programs.alacritty.enable = true;
   programs.neovim.enable = true;
   programs.bat = {

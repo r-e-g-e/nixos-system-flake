@@ -2,7 +2,7 @@
 {
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium;
+    package = pkgs.vscodium.fhs;
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = true;
     keybindings = [
