@@ -64,6 +64,11 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
+  services.printing = { 
+    enable = true;
+    drivers = [ pkgs.epson-201401w ]; 
+  };
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;

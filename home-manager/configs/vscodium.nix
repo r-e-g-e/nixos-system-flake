@@ -132,6 +132,9 @@
           };
         };
       };
+
+      "java.server.launchMode" = "Standard";
+      "java.signatureHelp.description.enabled" = true;
     };
     extensions = with pkgs.vscode-extensions; [
       vscodevim.vim
