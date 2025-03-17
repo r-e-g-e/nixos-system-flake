@@ -14,15 +14,10 @@
 
   networking = {
     hostName = "alfheim";
-    extraHosts = ''
-      127.0.0.1 noxis.com.br
-      127.0.0.1 git.noxis.com.br
-      127.0.0.1 ci.noxis.com.br
-    '';
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 80 22 ];
+      allowedTCPPorts = [ 22 80 443 ];
       allowedUDPPorts = [ ];
     };
   };
@@ -63,29 +58,18 @@
           "docker"
         ];
         shell = pkgs.fish;
-        openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMkXauaeJuijZTqWe5ijUAtKX84rRwq6yrAHqjmsONK8"
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMSJYhJUlTKGbruCs7AckLpdx6aveGwTxfwDka/aIONx"
-        ];
+        openssh.authorizedKeys.keys = readFile ../ssh_keys;
       };
-      gitlab = {
-        isSystemUser = true;
-        group = "gitlab";
-        extraGroups = [ "db" ];
-      };
+
       db = {
         isSystemUser = true;
         group = "db";
       };
     };
 
-    groups.gitlab = {
-      name = "gitlab";
-      members = [ "gitlab" ];
-    };
     groups.db = {
       name = "db";
-      members = [ "gitlab" "db" ];
+      members = [ "db" "angel" ];
     };
   };
 
@@ -154,6 +138,7 @@
       settings = {
         PasswordAuthentication = false;
         PermitRootLogin = "prohibit-password";
+        
       };
     };
 
@@ -166,7 +151,7 @@
     };
 
     postgresql = {
-      enable = true;
+      enable = false;
       package = pkgs.postgresql_17;
       ensureDatabases = [ "gitlab" ];
       ensureUsers = [ { name = "gitlab"; } ];
@@ -175,7 +160,7 @@
     };
 
     redis.servers.gitlab = {
-      enable = true;
+      enable = false;
       openFirewall = false;
       group = "gitlab";
       user = "gitlab";
@@ -204,11 +189,17 @@
       port = 8080;
     };
 
-    nginx = {
+    gitea = {
       enable = true;
+      stateDir = "/var/lib/gitea"; # Data dir (explicit default path)
+    };
+
+
+    nginx = {
+      enable = false;
       recommendedProxySettings = true;
-      recommendedGzipSettings = true;
-      recommendedOptimisation = true;
+      recommendedGzipSettings = false;
+      recommendedOptimisation = false;
       virtualHosts = {
         noxis = {
           serverName = "noxis.com.br";
