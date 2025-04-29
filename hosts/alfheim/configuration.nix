@@ -58,7 +58,7 @@
           "docker"
         ];
         shell = pkgs.fish;
-        openssh.authorizedKeys.keys = readFile ../ssh_keys;
+        # openssh.authorizedKeys.keys = readFile ../ssh_keys;
       };
 
       db = {
@@ -138,51 +138,16 @@
       settings = {
         PasswordAuthentication = false;
         PermitRootLogin = "prohibit-password";
-        
       };
     };
 
     mysql = {
       enable = false;
       package = pkgs.mariadb;
-      user = "db";
+      user = "angel";
       dataDir = "/var/lib/mysql";
       initialDatabases = [ { name = "noxis"; } ];
     };
-
-    postgresql = {
-      enable = false;
-      package = pkgs.postgresql_17;
-      ensureDatabases = [ "gitlab" ];
-      ensureUsers = [ { name = "gitlab"; } ];
-      port = 5432;
-      dataDir = "/var/lib/postgresql/17";
-    };
-
-    redis.servers.gitlab = {
-      enable = false;
-      openFirewall = false;
-      group = "gitlab";
-      user = "gitlab";
-    };
-
-    # gitlab = {
-    #   enable = false;
-    #   redisUrl = "unix:/run/redis-gitlab/redis.sock";
-    #   port = 8081;
-    #   databaseName = "gitlab";
-    #   databaseUsername = "gitlab";
-    #   databaseHost = "127.0.0.1:5432";
-    #   # TODO for PROD remove this temp passwords and configure proper password files and secrets with sops
-    #   databasePasswordFile = config.sops.templates.".toml".path;
-    #   initialRootPasswordFile = /run/secrets/gitlab/initialRootPassword;
-    #   secrets = {
-    #     secretFile = /run/secrets/gitlab/secretFile;
-    #     otpFile = /run/secrets/gitlab/optFile;
-    #     dbFile = /run/secrets/gitlab/dbFile;
-    #     jwsFile = /run/secrets/gitlab/jwsFile;
-    #   };
-    # };
 
     jenkins = {
       enable = false;
@@ -190,13 +155,17 @@
     };
 
     gitea = {
-      enable = true;
+      enable = false;
       stateDir = "/var/lib/gitea"; # Data dir (explicit default path)
+      database = {
+        type = "mysql";
+        socket = "";
+      };
     };
 
 
     nginx = {
-      enable = false;
+      enable = true;
       recommendedProxySettings = true;
       recommendedGzipSettings = false;
       recommendedOptimisation = false;
