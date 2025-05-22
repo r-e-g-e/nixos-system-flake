@@ -40,7 +40,7 @@
     };
   };
 
-  services.blueman-applet.enable = true;
+  # services.blueman-applet.enable = true;
 
   programs.git = {
     enable = true;
