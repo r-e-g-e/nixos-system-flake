@@ -2,8 +2,14 @@
   description = "Your new nix config";
 
   inputs = {
+    # Darwin
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
+    nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-24.11";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
+
+    # Linux X86-64
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    pkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-24.11";
@@ -15,10 +21,12 @@
     {
       self,
       nixpkgs,
-      pkgs-unstable,
+      nixpkgs-unstable,
       home-manager,
       sops-nix,
       aagl,
+      nix-darwin,
+      nixpkgs-darwin,
       ...
     }@inputs:
     let
@@ -40,7 +48,7 @@
 
         vanaheim = nixpkgs.lib.nixosSystem {
           specialArgs = {
-            inherit inputs outputs pkgs-unstable;
+            inherit inputs outputs nixpkgs-unstable;
           };
           modules = [
             ./hosts/vanaheim/configuration.nix
@@ -55,6 +63,15 @@
             ./hosts/alfheim/configuration.nix
             sops-nix.nixosModules.sops
           ];
+        };
+      };
+
+      darwinConfigurations = {
+        midgard = nix-darwin.lib.darwinSystem {
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [ ./hosts/midgard/configurationDarwin.nix ];
         };
       };
 

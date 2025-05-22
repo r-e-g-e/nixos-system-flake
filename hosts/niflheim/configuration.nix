@@ -40,7 +40,6 @@
   networking.hostName = "niflheim";
   networking.networkmanager.enable = true;
   networking.extraHosts = ''
-    172.20.128.2 pushstart.hrtech
     192.168.18.101 vanaheim
   '';
 
