@@ -7,9 +7,11 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-24.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
 
-    # Linux X86-64
+    # Linux
+    apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-beta.url = "github:nixos/nixpkgs/nixos-25.05";
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-24.11";
@@ -22,6 +24,7 @@
       self,
       nixpkgs,
       nixpkgs-unstable,
+      nixpkgs-beta,
       home-manager,
       sops-nix,
       aagl,
@@ -52,16 +55,18 @@
           };
           modules = [
             ./hosts/vanaheim/configuration.nix
+            home-manager.nixosModules.home-manager
           ];
         };
 
-        alfheim = nixpkgs.lib.nixosSystem {
+        midgard = nixpkgs-beta.lib.nixosSystem {
           specialArgs = {
             inherit inputs outputs;
           };
           modules = [
-            ./hosts/alfheim/configuration.nix
-            sops-nix.nixosModules.sops
+            ./hosts/midgard/configuration.nix
+            home-manager.nixosModules.home-manager
+            #sops-nix.nixosModules.sops
           ];
         };
       };

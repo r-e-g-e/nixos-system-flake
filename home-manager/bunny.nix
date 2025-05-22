@@ -4,11 +4,25 @@
 {
   inputs,
   pkgs,
+  config,
   ...
 }:
+let
+  isntMidgard = config.networking.hostname != "midgard";
+  packages = with pkgs; [
+    any-nix-shell
+    home-manager
+  ] ++ lib.optionals isntMidgard [
+    thunderbird
+    blender
+    dbeaver-bin
+    logseq
+    discord
+    guitarix
+    tuxguitar
+  ];
+in
 {
-  # You can import other home-manager modules here
-
   imports = [
     ./configs/hyprland.nix
     ./configs/vscodium.nix
@@ -24,15 +38,6 @@
     packages = (
       with pkgs;
       [
-        thunderbird
-        any-nix-shell
-        blender
-        dbeaver-bin
-        discord
-        logseq
-        home-manager
-        guitarix
-        tuxguitar
       ]
     );
     file = {
