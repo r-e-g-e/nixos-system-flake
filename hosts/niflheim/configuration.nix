@@ -33,7 +33,6 @@
     };
     users = {
       bunny = import ../../home-manager/bunny.nix;
-      kolab = import ../../home-manager/kolab.nix;
     };
   };
 
@@ -151,14 +150,6 @@
         "libvirtd"
         "syncthing"
       ];
-    };
-    kolab = {
-      initialPassword = "password";
-      isNormalUser = true;
-      description = "Kolab";
-      shell = pkgs.fish;
-      openssh.authorizedKeys.keys = [ ];
-      extraGroups = [ "docker" "syncthing" ];
     };
   };
 

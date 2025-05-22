@@ -24,7 +24,6 @@
     };
     users = {
       bunny = import ../../home-manager/bunny.nix;
-      kolab = import ../../home-manager/kolab.nix;
     };
   };
 
@@ -159,14 +158,6 @@
         "syncthing"
       ];
       shell = pkgs.fish;
-    };
-    kolab = {
-      initialPassword = "password";
-      isNormalUser = true;
-      description = "Kolab";
-      shell = pkgs.fish;
-      openssh.authorizedKeys.keys = [ ];
-      extraGroups = [ "docker" "syncthing" ];
     };
   };
   programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse.out}/libexec/seahorse/ssh-askpass";
